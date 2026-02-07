@@ -1,19 +1,574 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karanlık Korku Evi</title>
-    <style>
-        body::after {
-            content: '';
-            background-image: url('https://i.imgur.com/hUv0Rz1.jpg');
-            /* other styles */
-        }
-    </style>
+<html lang="tr">
+<head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17646744156">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-17646744156');
+</script>
+  <meta charset="UTF-8">
+  <title>Esenyurt Karanlık Hat Korku Evi</title>
+ <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="İstanbul Esenyurt'ta gerçek oyuncularla korkunun sınırlarını zorla! Karanlık Hat Korku Evi, nefes kesici bir deneyim. Hemen rezervasyon yap!">
+  <meta name="keywords" content="korku evi, esenyurt, korku, karanlık hat, rezervasyon, korku deneyimi, istanbul">
+  <meta name="author" content="Esenyurt Karanlık Hat Korku Evi">
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Structured data for Organization and logo (added by assistant) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Esenyurt Karanlık Hat Korku Evi",
+    "url": "https://www.xn--karanlkhatkorkuevi-j0c.com",
+    "logo": "https://r.resimlink.com/ljtEp3FX.png"
+  }
+  </script>
+
+  <!-- Open Graph / Twitter preview image using provided logo -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Esenyurt Karanlık Hat Korku Evi">
+  <meta property="og:title" content="Esenyurt Karanlık Hat Korku Evi">
+  <meta property="og:description" content="Gerçeğin kabusa dönüştüğü yer. Rezervasyon için tıklayın.">
+  <meta property="og:image" content="https://r.resimlink.com/ljtEp3FX.png">
+  <meta property="og:url" content="https://www.xn--karanlkhatkorkuevi-j0c.com">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Esenyurt Karanlık Hat Korku Evi">
+  <meta name="twitter:description" content="Gerçeğin kabusa dönüştüğü yer. Rezervasyon için tıklayın.">
+  <meta name="twitter:image" content="https://r.resimlink.com/ljtEp3FX.png">
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      min-height: 100%;
+      width: 100%;
+      color: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      scroll-behavior: smooth;
+      position: relative;
+      overflow-x: hidden;
+      background: #140c17;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      width: 100vw; height: 100vh;
+      top: 0; left: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://r.resimlink.com/mEODrVRt465y.png') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 1;
+      filter: brightness(1.12) contrast(1.08);
+    }
+    #entry-screen {
+      position:fixed; z-index:3000; top:0; left:0; width:100vw; height:100vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      transition:opacity .9s; opacity:1;
+      background-color: #1e1e22;
+      background: radial-gradient(circle at 60% 30%, #1e1e22 80%, #000 100%);
+      overflow: hidden;
+    }
+    #entry-screen::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 31%;
+      width: 220px;
+      height: 320px;
+      max-width: 80vw;
+      max-height: 60vh;
+      transform: translate(-50%, -50%);
+      background: url('https://i.hizliresim.com/5cnf0uu.png') center/contain no-repeat;
+      z-index: 1;
+      animation: phone-pulse 1.7s infinite cubic-bezier(.68,-0.55,.27,1.55);
+      filter: drop-shadow(0 0 17px #e53a40cc);
+      pointer-events: none;
+    }
+    @keyframes phone-pulse {
+      0%,100% {transform:translate(-50%, -50%) rotate(-6deg) scale(1);}
+      15% {transform:translate(-50%, -50%) rotate(6deg) scale(1.06);}
+      30% {transform:translate(-50%, -50%) rotate(-4deg) scale(1.02);}
+      55% {transform:translate(-50%, -50%) rotate(5deg) scale(1.08);}
+      80% {transform:translate(-50%, -50%) rotate(-4deg) scale(1.01);}
+    }
+    .entry-text {
+      font-family: 'Creepster', cursive;
+      font-size: 2.15em;
+      color: #fff;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 14px #e53a40cc;
+      text-align: center;
+      line-height: 1.2;
+      z-index:2;
+      position: relative;
+    }
+    .entry-buttons { display:flex; gap:30px; margin-bottom:10px; z-index:2; position: relative;}
+    .entry-btn {
+      font-family:'Montserrat', Arial, sans-serif; font-weight:700;
+      font-size:1.2em; padding:13px 36px; border-radius:8px; border:none;
+      cursor:pointer; background:linear-gradient(180deg, #ff2a3b 60%, #6d112d 100%);
+      color:#fff; box-shadow:0 4px 25px #e53a4088; transition:.14s;
+    }
+    .entry-btn:hover { background:#99171e; }
+    #alay-msg {margin-top:22px; font-family:'Creepster', cursive; font-size:1.3em; color:#e53a40; z-index:2; position:relative;}
+    .navbar {
+      width: 100vw;
+      background: rgba(30,10,22,0.97);
+      padding: 0;
+      box-shadow: 0 4px 24px #0008;
+      display: flex; align-items: center; justify-content: center;
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 2px solid #ff2a3b;
+    }
+    .nav-list {
+      display: flex;
+      gap: 18px;
+      list-style: none;
+      margin: 0; padding: 0 8px 0 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .nav-list::-webkit-scrollbar { display: none; }
+    .nav-btn, .rez-buton {
+      min-width: 110px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      .nav-btn, .rez-buton {
+        font-size: 0.97em;
+        padding: 13px 7px;
+        min-width: 90px;
+      }
+      .nav-list {
+        gap: 8px;
+      }
+    }
+    .nav-btn {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.13em;
+      font-weight: 700;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 18px 13px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: border-bottom .22s, color .18s;
+      letter-spacing: .5px;
+      position: relative;
+      border-radius: 0 0 8px 8px;
+      z-index:2;
+    }
+    .nav-btn.active, .nav-btn:hover {
+      color: #ff2a3b;
+      border-bottom: 3px solid #ff2a3b;
+      background: linear-gradient(90deg, #3d224a 10%, #140c17 90%);
+    }
+    .rez-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0 0 0;
+      align-items: stretch;
+    }
+    .rez-buton {
+      background: linear-gradient(180deg, #ff2a3b 60%, #6d112d 100%);
+      color: #fff;
+      border: none;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 1.1em;
+      border-radius: 8px;
+      padding: 16px 0;
+      box-shadow: 0 4px 18px #ff2a3bcc;
+      transition: background .24s, transform .13s;
+      letter-spacing: 1px;
+      cursor: pointer;
+      width: 100%;
+      min-width: 0;
+      text-align: center;
+      display: block;
+    }
+    .rez-buton:hover { background: #6d112d; transform: scale(1.03);}
+    .section {
+      display: none;
+      max-width: 980px;
+      margin: 40px auto 0 auto;
+      background: rgba(30,10,22,0.33); /* Yarı saydam kutu */
+      border-radius: 17px;
+      box-shadow: 0 0 65px #000b;
+      padding: 44px 32px 32px 32px;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+      min-height: 350px;
+      animation: fadeInCont .8s;
+    }
+    .section.active {
+      display: block;
+      animation: fadeInCont .8s;
+    }
+    .kanli-baslik {
+      font-family: 'Creepster', cursive;
+      font-size: 3em;
+      color: #fff;
+      margin-bottom: 8px;
+      background: linear-gradient(180deg, #ff2a3b 60%, #6d112d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 3px;
+      filter: drop-shadow(0 8px 24px #ff2a3b80);
+      text-align: center;
+      animation: kanDrip 3.3s infinite alternate;
+      position: relative;
+    }
+    @keyframes kanDrip {
+      0% { filter: drop-shadow(0 5px 8px #ff2a3b88); }
+      45% { filter: drop-shadow(0 16px 40px #ff2a3bcc);} 
+      100% { filter: drop-shadow(0 7px 18px #ff2a3b88);} 
+    }
+    .sloganlar {
+      font-size: 1.25em;
+      margin-bottom: 34px;
+      color: #ff2a3b;
+      text-shadow: 2px 2px 13px #000;
+      font-weight: 600;
+      text-align: center;
+    }
+    .aciklama, .hakkimizda, .kurallar-listesi li, .sss-listesi li {
+      font-size: 1.13em;
+      color: #f0eaea;
+      background: #3d224ad1;
+      border-left: 5px solid #ff2a3b;
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin-bottom: 23px;
+      box-shadow: 0 2px 14px #0007;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+    .album-baslik {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.22em;
+      color: #ff2a3b;
+      margin: 28px 0 15px 0;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 7px #0007;
+    }
+    .album {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: start;
+      min-height: 120px;
+      margin-bottom: 22px;
+    }
+    .album img {
+      width: 130px; height: 90px; object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 7px;
+      box-shadow: 0 3px 14px #b10002b9;
+      filter: brightness(.82) grayscale(.13);
+      transition: transform .2s, box-shadow .3s, filter .25s;
+      cursor: pointer;
+      border: 2.5px solid #ff2a3b;
+    }
+    .album img:hover {
+      transform: scale(1.14) rotate(-2deg);
+      box-shadow: 0 10px 25px #ff2a3b7a;
+      filter: brightness(1.01) grayscale(0) drop-shadow(0 0 18px #ff2a3b);
+      border-color: #f00028;
+    }
+    .kurallar-listesi, .sss-listesi {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .kurallar-listesi li, .sss-listesi li {
+      margin-bottom: 13px; border-left: 5px solid #ff2a3b;
+      position: relative;
+    }
+    .kurallar-listesi li::before {
+      content: "\f714";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: #ff2a3b;
+      margin-right: 13px;
+      font-size: 1.24em;
+      vertical-align: middle;
+      position: absolute;
+      left: 8px; top: 16px;
+    }
+    .sss-listesi li {
+      background: #4a224ad1;
+      border-left: 5px solid #e261e6;
+    }
+    .sss-soru {
+      color: #e261e6;
+      font-weight: 700;
+    }
+    .footer {
+      margin-top: 38px;
+      font-size: .93em;
+      text-align: center;
+      color: #888;
+      letter-spacing: .5px;
+      padding-bottom: 20px;
+      opacity: .85;
+      z-index: 20;
+      position: relative;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Karanlık Korku Evi</h1>
-    <!-- other content -->
+  <!-- GİRİŞ EKRANI -->
+  <div id="entry-screen">
+    <div class="entry-text">Çalıyor...<br>Cevap verecek misin?</div>
+    <div class="entry-buttons">
+      <button class="entry-btn" id="answer-btn">EVET</button>
+      <button class="entry-btn" id="no-btn">HAYIR</button>
+    </div>
+    <div id="alay-msg"></div>
+  </div>
+  <!-- MENÜ -->
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li><button class="nav-btn active" onclick="showSection('home')"><i class="fa-solid fa-house"></i> Ana Sayfa</button></li>
+      <li><button class="nav-btn" onclick="showSection('hikkaye')"><i class="fa-solid fa-book"></i> Oyun Hikayesi</button></li>
+      <li><button class="nav-btn" onclick="showSection('seviyeler')"><i class="fa-solid fa-layer-group"></i> Seviyeler</button></li>
+      <li><button class="nav-btn" onclick="showSection('kurallar')"><i class="fa-solid fa-triangle-exclamation"></i> Kurallar</button></li>
+      <li><button class="nav-btn" onclick="showSection('album')"><i class="fa-solid fa-photo-film"></i> Albüm</button></li>
+      <li><button class="nav-btn" onclick="showSection('sss')"><i class="fa-solid fa-question"></i> SSS</button></li>
+      <li><button class="nav-btn" onclick="showSection('hakkinda')"><i class="fa-solid fa-circle-info"></i> Hakkında</button></li>
+      <li><a class="rez-buton" href="https://docs.google.com/forms/d/e/1FAIpQLSepwC3OyEHAJGnS9FjRSAM7D96O16Kh_Ah8VVZg-Kfg5cR7fQ/viewform?usp=dialog" target="_blank"><i class="fa-solid fa-calendar"></i> Rezervasyon</a></li>
+    </ul>
+  </nav>
+  <!-- ANA SAYFA -->
+  <div class="section active" id="home">
+    <div class="kanli-baslik">Esenyurt Karanlık Hat Korku Evi</div>
+    <div class="sloganlar">
+      <div>Gerçeğin kabusa dönüştüğü yer...</div>
+      <div>Eğer telefonu açarsan, dolap yeniden kapısını aralar...</div>
+    </div>
+    <div class="aciklama">
+      Esenyurt 'un en karanlık köşesinde, cesaretin sınandığı eşsiz bir deneyime hazır mısın?<br>
+      Esenyurt Karanlık Hat Korku Evi'nde gerçek oyuncular, özel efektler ve nefes kesen dekorlarla korkunun sınırlarını zorlayacaksın.<br>
+      <strong>Cesaretin varsa, hemen <a href="https://docs.google.com/forms/d/e/1FAIpQLSepwC3OyEHAJGnS9FjRSAM7D96O16Kh_Ah8VVZg-Kfg5cR7fQ/viewform?usp=dialog" target="_blank" style="color:#ff2a3b;">rezervasyon yap</a></strong>
+    </div>
+    <div class="album-baslik" style="margin-top:20px;">Adres & Konum</div>
+    <div style="font-size:1.07em;margin-bottom:10px;"><br>Nak Kemal, 15. Sk. No:1/A D:1, 34513 Esenyurt/İstanbul</div>
+    <div style="margin:0 0 25px 0;">
+      <iframe src="https://www.google.com/maps?q=Namık+Kemal,+15.+Sk.+No:1+D:1,+34513+Esenyurt/İstanbul&output=embed" width="100%" height="270" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div class="rez-row">
+      <a href="https://wa.me/905333814921?text=Merhaba%2C%20rezervasyon%20yapmak%20istiyorum." target="_blank" class="rez-buton"><i class="fa-brands fa-whatsapp"></i> WhatsApp Rezervasyon</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSepwC3OyEHAJGnS9FjRSAM7D96O16Kh_Ah8VVZg-Kfg5cR7fQ/viewform?usp=dialog" target="_blank" class="rez-buton"><i class="fa-solid fa-calendar-check"></i> Form ile Rezervasyon</a>
+    </div>
+    <div class="album-baslik" style="margin-top:20px;">İletişim</div>
+    <div style="font-size:1.09em;">
+      <b>Telefon:</b> <a href="tel:+905334842521" style="color:#ff2a3b;">+90 533 484 2521</a><br>
+      <b>WhatsApp:</b> <a href="https://wa.me/905333814921?text=Merhaba%2C%20rezervasyon%20yapmak%20istiyorum." target="_blank" style="color:#25D366;">+90 533 381 4921</a><br>
+      <b>Instagram:</b> <a href="https://www.instagram.com/karanlikhatkorkuevi?igsh=NnAwdHJnempxcTRu" target="_blank" style="color:#e4405f;">@karanlikhatkorkuevi</a>
+    </div>
+  </div>
+  <!-- OYUN HİKAYESİ -->
+  <div class="section" id="hikkaye">
+    <div class="kanli-baslik">Oyun Hikayesi</div>
+    <div class="aciklama">
+      <strong>Karanlık Hat – Lanetli Dolap</strong> <br><br>
+      Yıl 1940.<br><br>
+      Savaş tüm dünyayı kasıp kavururken, iki kardeş  bombardımandan kaçıp uzak bir kasabanın kenarındaki terkedilmiş bir eve sığınır. Evin duvarları rutubet içindedir, hava küflüdür ve içeride garip sesler duyulmaktadır.<br><br>
+      <em>“Telefona cevap vermeden, dolap kapısı kapanmaz”</em> <br><br>
+      Gecenin ilerleyen saatlerinde evin sessizliği bozulur. Salondaki çevirmeli telefon, hiçbir bağlantısı olmamasına rağmen çalmaya başlar. Zil sesi evin duvarlarını titretecek kadar kuvvetlidir.<br><br>
+      <em>“Dolaba girmezsen… sesin bir daha duyulmaz…”</em><br><br>
+      O an evin ışıklar söner. Kapılar kilitlenir, kardeşler çığlık atar, ama ses yankılanmadan kaybolur. Kardeşler çaresizce odanın köşesindeki eski dolaba koşar. Kapıyı kapatırlar ve aniden her şey gerçek dışı bir hal alır.<br><br>
+      Sabah köylüler evi bulduğunda içeride kimse yoktur. Dolabın kapısı aralıktır ama içi bomboştur. Sadece yerde dağılmış yanmış kâğıt parçaları ve çevirmeli telefonun halkası bırakılmıştır.<br><br>
+      <em>“Eğer telefonu açarsan… dolap yeniden kapısını aralar.”</em>
+    </div>
+  </div>
+  <!-- SEVİYELER -->
+  <div class="section" id="seviyeler">
+    <div class="kanli-baslik">Oyun Seviyesi Seçimi</div>
+    <div class="aciklama">Korku dozunu seç! Her seviye, farklı bir deneyim ve cesaret testi sunar.</div>
+    <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-top:25px;">
+      <div style="background:#232323;border-radius:12px;padding:22px 18px;Max-width:300px;min-width:220px;box-shadow:0 0 15px #333;">
+        <div style="font-family:'Creepster',cursive;font-size:1.5em;color:#ccc;margin-bottom:8px;">1. Seviye: Amatör</div>
+        <ul style="padding-left:18px;">
+          <li>Temas yok.</li>
+          <li>Az korku ve hafif gerilim.</li>
+          <li>Daha çok eğlence ve bulmaca odaklı.</li>
+        </ul>
+        <button class="rez-buton" style="background:linear-gradient(90deg,#888 60%,#333 100%);margin-top:14px;" onclick="showLevelDetail(1)">Detay</button>
+      </div>
+      <div style="background:#2a1f26;border-radius:12px;padding:22px 18px;max-width:300px;min-width:220px;box-shadow:0 0 15px #6d112d;">
+        <div style="font-family:'Creepster',cursive;font-size:1.5em;color:#ff2a3b;margin-bottom:8px;">2. Seviye: Normal</div>
+        <ul style="padding-left:18px;">
+          <li>Temas isteğe bağlı.</li>
+          <li>Korku ve gerilim dozu orta.</li>
+          <li>Daha fazla sürpriz ve efekt.</li>
+        </ul>
+        <button class="rez-buton" style="background:linear-gradient(90deg,#ff2a3b 60%,#6d112d 100%);margin-top:14px;" onclick="showLevelDetail(2)">Detay</button>
+      </div>
+      <div style="background:#200c14;border-radius:12px;padding:22px 18px;max-width:300px;min-width:220px;box-shadow:0 0 15px #ff2a3b;">
+        <div style="font-family:'Creepster',cursive;font-size:1.5em;color:#ff2a3b;margin-bottom:8px;">3. Seviye: Azap!</div>
+        <ul style="padding-left:18px;">
+          <li>Kurallar bize ait!</li>
+          <li>Her şey olabilir, adrenalin maksimum!</li>
+          <li>İsteğe bağlı: <b>Canlı hayvanlar</b> kullanılabilir.</li>
+        </ul>
+        <button class="rez-buton" style="background:linear-gradient(90deg,#6d112d 30%,#222 100%);margin-top:14px;" onclick="showLevelDetail(3)">Detay</button>
+      </div>
+    </div>
+  </div>
+  <!-- Seviye detay modalı -->
+  <div id="levelModal" style="display:none;position:fixed;top:0;left:0;z-index:4000;width:100vw;height:100vh;background:rgba(0,0,0,0.74);align-items:center;justify-content:center;">
+    <div style="background:#232323;color:#fff;padding:36px 28px;border-radius:17px;max-width:340px;min-width:240px;box-shadow:0 0 55px #000;position:relative;">
+      <span id="closeLevelModal" style="position:absolute;top:6px;right:14px;font-size:1.3em;cursor:pointer;">&times;</span>
+      <div id="levelModalContent"></div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSepwC3OyEHAJGnS9FjRSAM7D96O16Kh_Ah8VVZg-Kfg5cR7fQ/viewform?usp=dialog" target="_blank" class="rez-buton" style="margin-top:22px;">Rezervasyon Yap</a>
+    </div>
+  </div>
+  <!-- KURALLAR -->
+  <div class="section" id="kurallar">
+    <div class="kanli-baslik">Karanlık Hat Korku Evi <br>Oyun Kuralları</div>
+    <div class="aciklama">
+      Korku evi maceranıza başlamadan önce, hem kendi güvenliğiniz hem de unutulmaz bir deneyim yaşamanız için lütfen aşağıdaki kuralları dikkatlice okuyunuz.
+    </div>
+    <ul class="kurallar-listesi">
+      <li>Oyunda fiziksel şiddet ve ekipmanlara zarar kesinlikle yasaktır.</li>
+      <li>Oyun alanında yiyecek ve içecek bulundurmak yasaktır.</li>
+      <li>Oyun sırasında cep telefonu ve kamera kullanımı yasaktır.</li>
+      <li>Sağlık sorununuz varsa (epilepsi, kalp, panik atak vb.) ekibe bildirin.</li>
+      <li>Kural ihlali halinde oyun sonlandırılır ve ücret iadesi yapılmaz.</li>
+      <li>İçerideki canlı hayvanlara zarar vermek yasaktır.</li>
+      <li>Aktörlere argo ve şiddet yasaktır. İlk kural ihlali halinde uyarı, ikinci kural ihlali halinde oyun ekipçe biter.</li>
+    </ul>
+  </div>
+  <!-- ALBÜM -->
+  <div class="section" id="album">
+    <div class="kanli-baslik">Karanlık Hat Korku Evi<br>Albüm</div>
+    <div class="album-baslik"><i class="fa-solid fa-photo-film"></i> Unutulmaz Anlar</div>
+    <div class="album">
+      <img src="https://r.resimlink.com/DbczvX.png" alt="Korku Evi 1">
+      <img src="https://r.resimlink.com/5UeBDX.jpeg" alt="Korku Evi 2">
+      <img src="https://r.resimlink.com/SLI6e1JcKdVC.jpeg" alt="Korku Evi 3">
+      <img src="https://r.resimlink.com/2f-ky9LJW.jpeg" alt="Korku Evi 4">
+      <img src="https://r.resimlink.com/Y6XBT7wZ.jpeg" alt="Korku Evi 5">
+    </div>
+  </div>
+  <!-- SSS -->
+  <div class="section" id="sss">
+    <div class="kanli-baslik">Sıkça Sorulan Sorular</div>
+    <ul class="sss-listesi">
+      <li>
+        <div class="sss-soru">Oyun kaç dakika sürüyor?</div>
+        <div>Cevap: Ortalama 60 dakika sürmektedir.</div>
+      </li>
+      <li>
+        <div class="sss-soru">Yaş sınırı var mı?</div>
+        <div>Cevap: 16 yaş ve üzeri katılım uygundur. 18 yaş altı için aile izni gereklidir.</div>
+      </li>
+      <li>
+        <div class="sss-soru">Oyun sırasında gerçekten dokunuluyor mu?</div>
+        <div>Cevap: Oyun deneyiminizi zenginleştirmek için bazı temaslar olabilir. Katılmadan önce ekibe özel hassasiyetlerinizi bildirin.</div>
+      </li>
+      <li>
+        <div class="sss-soru">Kaç kişi katılabiliriz?</div>
+        <div>Cevap: Minimum 2, maksimum 10 kişi aynı anda katılabilir.</div>
+      </li>
+      <li>
+        <div class="sss-soru">Rezervasyon nasıl yapılıyor?</div>
+        <div>Cevap: Menüden “Rezervasyon” butonuna tıklayarak veya iletişim formunu doldurarak kolayca rezervasyon yapabilirsiniz.</div>
+      </li>
+      <li>
+        <div class="sss-soru">İşletmede doğum günü, evlilik teklifi vb. etkinlikler yapılabilir mi?</div>
+        <div>Cevap: Evet yapılabilir. Kişi isteğine bağlı etkinlikler yapılabilir, ekstra ücret alınarak.</div>
+      </li>
+    </ul>
+  </div>
+  <!-- HAKKINDA -->
+  <div class="section" id="hakkinda">
+    <div class="kanli-baslik">Hakkımızda</div>
+    <div class="hakkimizda">
+      Karanlık Hat Korku Evi, unutulmaz korku ve gerilim deneyimleri sunmak için kuruldu. Gerçek oyuncular, gerçek hayvanlar, sürükleyici senaryolar ve özel efektlerle şehrin en cesur ziyaretçilerine hizmet veriyoruz.<br>
+      •11 ODA<br>
+      •1 KORİDOR<br>
+      •2 TÜNEL GİRİŞİ<br>
+      •GERÇEK HAYVAN (İSTEĞE BAĞLI)<br>
+      <br>
+      Cesaretin varsa sen de bu eşsiz deneyimin bir parçası ol!
+    </div>
+    <div class="album-baslik">Sosyal Medyada Bizi Takip Et!</div>
+    <div class="album">
+      <a href="https://www.instagram.com/karanlikhatkorkuevi?igsh=NnAwdHJnempxcTRu" target="_blank" title="Instagram"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="45" alt="Instagram"></a>
+      <a href="https://wa.me/905333814921?text=Merhaba%2C%20rezervasyon%20yapmak%20istiyorum." target="_blank" title="WhatsApp"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="45" alt="WhatsApp"></a>
+      <a href="tel:+905334842521" title="Telefon"><img src="https://cdn-icons-png.flaticon.com/512/159/159832.png" width="45" alt="Telefon"></a>
+    </div>
+  </div>
+  <div class="footer">
+    &copy; 2025 Karanlık Hat Korku Evi | Tüm hakları saklıdır.
+  </div>
+  <script>
+    // GİRİŞ EKRANI KONTROLÜ
+    const entryScreen = document.getElementById('entry-screen');
+    const answerBtn = document.getElementById('answer-btn');
+    const noBtn = document.getElementById('no-btn');
+    const alayMsg = document.getElementById('alay-msg');
+    answerBtn.onclick = () => {
+      entryScreen.style.opacity = 0;
+      setTimeout(() => { entryScreen.style.display = "none"; }, 900);
+      window.scrollTo(0,0);
+    };
+    noBtn.onclick = () => {
+      alayMsg.innerText = "Korkak! O zaman gerçek kabusunu asla öğrenemeyeceksin...";
+      alayMsg.style.opacity = 1;
+    };
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      let btns = document.getElementsByClassName('nav-btn');
+      for(let btn of btns) {
+        if(btn.onclick && btn.onclick.toString().includes(id)) btn.classList.add('active');
+      }
+      window.scrollTo(0,0);
+    }
+    function showLevelDetail(level) {
+      let html = '';
+      if(level==1){
+        html = `<div style="font-family:'Creepster',cursive;font-size:1.4em;color:#ccc;margin-bottom:8px;">1. Seviye: Amatör</div>
+        <ul><li>Temas yok.</li><li>Az korku ve hafif gerilim içerir.</li><li>Daha çok eğlence ve bulmaca odaklı.</li></ul>`;
+      }
+      if(level==2){
+        html = `<div style="font-family:'Creepster',cursive;font-size:1.4em;color:#ff2a3b;margin-bottom:8px;">2. Seviye: Normal</div>
+        <ul><li>Temas var.</li><li>Korku ve gerilim içerir.</li><li>Daha fazla sürpriz ve efekt.</li></ul>`;
+      }
+      if(level==3){
+        html = `<div style="font-family:'Creepster',cursive;font-size:1.4em;color:#ff2a3b;margin-bottom:8px;">3. Seviye: Sınır Yok!</div>
+        <ul><li>Kurallar bize ait!</li><li>Her şey bulunur, adrenalin maksimum!</li><li>İsteğe bağlı: <b>Canlı hayvanlar</b> kullanılabilir.</li></ul>`;
+      }
+      document.getElementById('levelModalContent').innerHTML = html;
+      document.getElementById('levelModal').style.display = 'flex';
+    }
+    function closeLevelModal(){
+      document.getElementById('levelModal').style.display = 'none';
+    }
+    document.getElementById('closeLevelModal').onclick = closeLevelModal;
+  </script>
 </body>
+
 </html>
