@@ -179,18 +179,18 @@
       overflow: hidden;
     }
 
-    .entry-card::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 290px;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: url("https://i.ibb.co/whYprFhG/Chat-GPT-mage-27-Tem-2026-07-53-03.png") center / contain no-repeat;
-      filter: drop-shadow(0 0 22px rgba(226,15,39,.75));
-      animation: phonePulse 1.7s infinite cubic-bezier(.68,-0.55,.27,1.55);
-    }
+    .entry-card::before{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    top:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:url("https://i.ibb.co/whYprFhG/Chat-GPT-mage-27-Tem-2026-07-53-03.png") center/contain no-repeat;
+    filter:drop-shadow(0 0 35px rgba(226,15,39,.45));
+    animation:phonePulse 2s infinite ease-in-out;
+}
 
     @keyframes phonePulse {
       0%,100% { transform: translateX(-50%) rotate(-4deg) scale(1); }
