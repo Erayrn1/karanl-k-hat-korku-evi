@@ -92,17 +92,16 @@
         var(--bg);
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      background:
-        linear-gradient(rgba(6, 3, 5, .54), rgba(6, 3, 5, .84)),
-        url("https://i.ibb.co/Pvv0cGMQ/Chat-GPT-mage-27-Tem-2026-06-37-04.png") center / cover no-repeat;
-      filter: contrast(1.05) saturate(.9);
-      transform: scale(1.01);
-    }
+   body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    background:
+        linear-gradient(rgba(6,3,5,.45), rgba(6,3,5,.80)),
+        url("https://i.ibb.co/Pvv0cGMQ/Chat-GPT-mage-27-Tem-2026-06-37-04.png")
+        center center / cover no-repeat;
+}
 
     body::after {
       content: "";
