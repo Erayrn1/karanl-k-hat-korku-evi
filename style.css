@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #050505;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Menü */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: rgba(0,0,0,0.8);
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00ff88;
+}
+
+
+/* Ana bölüm */
+
+section {
+    min-height: 100vh;
+    padding: 120px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.hero {
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 60px;
+    letter-spacing: 5px;
+}
+
+.hero p {
+    margin-top: 20px;
+    color: #aaa;
+}
+
+
+/* Albüm kartları */
+
+.album-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.album {
+    width: 250px;
+    background: #111;
+    padding: 20px;
+    border-radius: 15px;
+    transition: .3s;
+}
+
+.album:hover {
+    transform: translateY(-10px);
+}
+
+.album img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+/* Hikaye */
+
+.story {
+    max-width: 800px;
+    line-height: 1.8;
+    color: #ddd;
+}
+
+
+/* Mobil */
+
+@media(max-width:700px){
+
+nav{
+    gap:15px;
+}
+
+nav a{
+    font-size:14px;
+}
+
+.hero h1{
+    font-size:35px;
+}
+
+}
