@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #080808;
+    --sidebar: #101010;
+    --panel: #161616;
+    --panel-light: #1d1d1d;
+    --border: #2a2a2a;
+    --text: #f5f5f5;
+    --muted: #999999;
+    --red: #a60000;
+    --red-hover: #d00000;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+}
+
+/* Sol menü */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    padding: 28px 20px;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.logo-area {
+    padding: 0 8px 25px;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo-area h2 {
+    color: #ffffff;
+    font-size: 21px;
+    letter-spacing: 2px;
+}
+
+.logo-area span {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.admin-menu {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: #bbbbbb;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: var(--panel);
+    color: #ffffff;
+}
+
+.menu-item.active {
+    background: rgba(166, 0, 0, 0.18);
+    border-color: rgba(208, 0, 0, 0.45);
+    color: #ffffff;
+}
+
+.site-link {
+    margin-top: auto;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #dddddd;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.site-link:hover {
+    border-color: var(--red-hover);
+    color: #ffffff;
+}
+
+/* Ana içerik */
+
+.admin-content {
+    width: calc(100% - 260px);
+    min-height: 100vh;
+    margin-left: 260px;
+    padding: 30px;
+}
+
+.topbar {
+    min-height: 82px;
+    padding: 18px 22px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar h1 {
+    font-size: 24px;
+}
+
+.topbar p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.logout-button {
+    padding: 11px 17px;
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-button:hover {
+    background: var(--red);
+}
+
+.content-area {
+    margin-top: 24px;
+    padding: 24px;
+    min-height: 500px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.loading {
+    color: var(--muted);
+}
+
+/* Form elemanları */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #dddddd;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    background: var(--panel-light);
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--red-hover);
+}
+
+.save-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--red);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.save-button:hover {
+    background: var(--red-hover);
+}
+
+/* Mobil */
+
+@media (max-width: 850px) {
+    body {
+        display: block;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .admin-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .site-link {
+        margin-top: 20px;
+    }
+
+    .admin-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 16px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 520px) {
+    .admin-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        flex-direction: column;
+    }
+
+    .logout-button {
+        width: 100%;
+    }
+
+    .content-area {
+        padding: 17px;
+    }
+}
