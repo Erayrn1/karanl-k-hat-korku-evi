@@ -842,7 +842,8 @@
       aspect-ratio: 1 / 1;
       background:
         radial-gradient(circle at center, transparent 25%, rgba(0,0,0,.28) 65%, #000 100%),
-        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZyIgY3g9IjUwJSIgY3k9IjQyJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNkOGQ4ZDgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI0NSUiIHN0b3AtY29sb3I9IiM3NzciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDUwNTA1Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNCIvPjwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAwMCIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIzOTAiIHJ4PSIyNTAiIHJ5PSIzMjAiIGZpbGw9InVybCgjZykiLz4KICA8ZWxsaXBzZSBjeD0iMzEwIiBjeT0iMzMwIiByeD0iNjUiIHJ5PSI5NSIgZmlsbD0iIzA1MDUwNSIvPgogIDxlbGxpcHNlIGN4PSI0OTAiIGN5PSIzMzAiIHJ4PSI2NSIgcnk9Ijk1IiBmaWxsPSIjMDUwNTA1Ii8+CiAgPGNpcmNsZSBjeD0iMzEwIiBjeT0iMzQ1IiByPSIxMiIgZmlsbD0iI2ZmZiIvPgogIDxjaXJjbGUgY3g9IjQ5MCIgY3k9IjM0NSIgcj0iMTIiIGZpbGw9IiNmZmYiLz4KICA8cGF0aCBkPSJNMjYwIDU2MCBRNDAwIDY5MCA1NDAgNTYwIFE0OTAgNzQwIDQwMCA3NTAgUTMxMCA3NDAgMjYwIDU2MFoiIGZpbGw9IiMwNTA1MDUiLz4KICA8cGF0aCBkPSJNMzIwIDU4NSBMMzQwIDY0MCBNMzcwIDYwMCBMMzgwIDY2MCBNNDMwIDYwMCBMNDIwIDY2MCBNNDgwIDU4NSBMNDYwIDY0MCIgc3Ryb2tlPSIjZWVlIiBzdHJva2Utd2lkdGg9IjE0Ii8+CiAgPHBhdGggZD0iTTIyMCAyNTAgUTMxMCAxNjAgMzgwIDIyMCBNNDIwIDIyMCBRNTAwIDE2MCA1ODAgMjUwIiBzdHJva2U9IiMxMTEiIHN0cm9rZS13aWR0aD0iMzAiIGZpbGw9Im5vbmUiLz4KICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iNzkwIiByeD0iMzIwIiByeT0iODAiIGZpbGw9IiMwMDAiIGZpbHRlcj0idXJsKCNibHVyKSIvPgo8L3N2Zz4=") center / contain no-repeat;
+        url("https://i.ibb.co/whYprFhG/Chat-GPT-mage-27-Tem-2026-07-53-03.png")
+        center / contain no-repeat;
       filter: contrast(1.55) saturate(.45) brightness(1.15)
               drop-shadow(0 0 45px rgba(255,0,30,.8));
       transform: scale(.15) rotate(-8deg);
@@ -974,17 +975,17 @@
       bottom: 18px;
       z-index: 99970;
       display: none;
-      width: 150px;
-      height: 150px;
-      padding: 0;
-      border: 0;
-      border-radius: 50%;
-      background:
-        url("https://i.ibb.co/whYprFhG/Chat-GPT-mage-27-Tem-2026-07-53-03.png")
-        center / contain no-repeat;
-      filter: drop-shadow(0 0 28px rgba(226,15,39,.65));
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 16px;
+      background: rgba(8,5,7,.92);
+      color: #fff;
+      box-shadow: 0 18px 55px rgba(0,0,0,.65), 0 0 28px rgba(226,15,39,.3);
       cursor: pointer;
       user-select: none;
+      backdrop-filter: blur(12px);
     }
 
     #corner-phone.show {
@@ -992,9 +993,14 @@
       animation: phoneAppear .45s ease, phoneRing .28s linear 4 .45s;
     }
 
-    #corner-phone i,
+    #corner-phone i {
+      color: var(--red);
+      font-size: 1.35rem;
+    }
+
     #corner-phone span {
-      display: none;
+      font-weight: 900;
+      letter-spacing: .4px;
     }
 
     #phone-choice-modal .modal-card {
@@ -1420,26 +1426,15 @@
       <button class="modal-close" data-close-modal aria-label="Kapat">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 id="phone-title">HATTA BİRİ VAR</h3>
-      <p id="phone-message"></p>
+      <h3>HATTA BİRİ VAR</h3>
+      <p id="phone-message">“Dolabın içinden gelen sesi sen de duydun mu?”</p>
       <div class="choice-grid">
-        <button class="btn btn-primary phone-choice" data-choice="a"></button>
-        <button class="btn btn-secondary phone-choice" data-choice="b"></button>
+        <button class="btn btn-primary phone-choice" data-choice="answer">Cevap Ver</button>
+        <button class="btn btn-secondary phone-choice" data-choice="hangup">Yüzüne Kapat</button>
       </div>
       <div class="choice-result" id="choice-result"></div>
     </div>
   </div>
-
-
-  <!-- Gerçek ses dosyaları: assets klasörüne bu adlarla MP3 koy -->
-  <audio id="sound-scream-1" preload="auto" src="assets/scream-1.mp3"></audio>
-  <audio id="sound-scream-2" preload="auto" src="assets/scream-2.mp3"></audio>
-  <audio id="sound-whisper-1" preload="auto" src="assets/whisper-1.mp3"></audio>
-  <audio id="sound-whisper-2" preload="auto" src="assets/whisper-2.mp3"></audio>
-  <audio id="sound-door" preload="auto" src="assets/door-creak.mp3"></audio>
-  <audio id="sound-chain" preload="auto" src="assets/chain.mp3"></audio>
-  <audio id="sound-laugh" preload="auto" src="assets/child-laugh.mp3"></audio>
-  <audio id="sound-phone" preload="auto" src="assets/phone-ring.mp3" loop></audio>
 
   <footer>
     © 2026 Karanlık Hat Korku Evi. Tüm hakları saklıdır.
@@ -1649,7 +1644,7 @@
       sessionStorage.setItem("karanlikHatScared", "1");
       jumpscare.classList.add("active");
       document.body.classList.add("jumpscare-shake");
-      if (!playRealSound("scream", .75)) playScareSound();
+      playScareSound();
 
       setTimeout(() => {
         jumpscare.classList.remove("active");
@@ -1707,91 +1702,6 @@
       scheduleJumpscare();
     }
 
-
-
-    const realSounds = {
-      scream: [document.getElementById("sound-scream-1"), document.getElementById("sound-scream-2")],
-      whisper: [document.getElementById("sound-whisper-1"), document.getElementById("sound-whisper-2")],
-      door: [document.getElementById("sound-door")],
-      chain: [document.getElementById("sound-chain")],
-      laugh: [document.getElementById("sound-laugh")],
-      phone: [document.getElementById("sound-phone")]
-    };
-
-    function playRealSound(type, volume = .5) {
-      const list = (realSounds[type] || []).filter(Boolean);
-      if (!list.length) return false;
-      const sound = list[Math.floor(Math.random() * list.length)];
-      sound.pause();
-      sound.currentTime = 0;
-      sound.volume = volume;
-      const result = sound.play();
-      if (result && result.catch) result.catch(() => {});
-      return true;
-    }
-
-    function stopPhoneRing() {
-      const phoneSound = document.getElementById("sound-phone");
-      if (phoneSound) {
-        phoneSound.pause();
-        phoneSound.currentTime = 0;
-      }
-    }
-
-    const phoneScenarios = [
-      {
-        title: "HATTA BİRİ VAR",
-        question: "Dolabın içinden gelen sesi sen de duydun mu?",
-        a: "Evet, duydum",
-        b: "Hayır, duymadım",
-        ra: "O zaman neden hâlâ arkanı dönüyorsun?",
-        rb: "Yalan söylüyorsun. O da bunu biliyor.",
-        soundA: "whisper",
-        soundB: "laugh"
-      },
-      {
-        title: "NUMARA YOK",
-        question: "Kapıyı kilitlediğine emin misin?",
-        a: "Eminim",
-        b: "Kontrol edeceğim",
-        ra: "Kilit içeriden açıldı.",
-        rb: "Geç kaldın. Kapı zaten açık.",
-        soundA: "door",
-        soundB: "chain"
-      },
-      {
-        title: "ARAMA SENİN İÇİN",
-        question: "Telefonu açan son kişi geri dönemedi. Devam edecek misin?",
-        a: "Devam et",
-        b: "Aramayı bitir",
-        ra: "İyi. Şimdi ışıkları kapat.",
-        rb: "Arama bitti. Ama o hâlâ hatta.",
-        soundA: "scream",
-        soundB: "whisper"
-      },
-      {
-        title: "DOLAPTAN GELEN SES",
-        question: "İçeride kaç kişi var?",
-        a: "Bir kişi",
-        b: "Kimse yok",
-        ra: "Yanlış. Şimdi iki kişisiniz.",
-        rb: "O zaman nefes alan kim?",
-        soundA: "laugh",
-        soundB: "whisper"
-      },
-      {
-        title: "SON SEÇİM",
-        question: "Karanlıkta kimi bırakacaksın?",
-        a: "Kendimi",
-        b: "Arkadaşımı",
-        ra: "Seçimin kabul edildi.",
-        rb: "O seni çoktan seçmişti.",
-        soundA: "chain",
-        soundB: "scream"
-      }
-    ];
-
-    let activePhoneScenario = null;
 
     /* Gelişmiş atmosfer */
     const fakeCursor = document.getElementById("fake-cursor");
@@ -1860,7 +1770,6 @@
     });
 
     function playAmbientEffect(type) {
-      if (playRealSound(type, type === "scream" ? .7 : .35)) return;
       if (!audioContext) return;
       const now = audioContext.currentTime;
       const master = audioContext.createGain();
@@ -1951,9 +1860,8 @@
         phonePopupTimer = setTimeout(() => {
           if (!document.hidden && !cornerPhone.classList.contains("show")) {
             cornerPhone.classList.add("show");
-            playRealSound("phone", .45);
             playAmbientEffect("chain");
-            setTimeout(() => { cornerPhone.classList.remove("show"); stopPhoneRing(); }, 12000);
+            setTimeout(() => cornerPhone.classList.remove("show"), 12000);
           }
           phonePopupTimer = null;
           show();
@@ -1964,17 +1872,7 @@
 
     cornerPhone.addEventListener("click", () => {
       cornerPhone.classList.remove("show");
-      stopPhoneRing();
       choiceResult.textContent = "";
-      activePhoneScenario = phoneScenarios[Math.floor(Math.random() * phoneScenarios.length)];
-
-      document.getElementById("phone-title").textContent = activePhoneScenario.title;
-      document.getElementById("phone-message").textContent = "“" + activePhoneScenario.question + "”";
-
-      const choiceButtons = document.querySelectorAll(".phone-choice");
-      choiceButtons[0].textContent = activePhoneScenario.a;
-      choiceButtons[1].textContent = activePhoneScenario.b;
-
       phoneChoiceModal.classList.add("open");
       phoneChoiceModal.setAttribute("aria-hidden", "false");
       playAmbientEffect("whisper");
@@ -1982,19 +1880,19 @@
 
     document.querySelectorAll(".phone-choice").forEach(button => {
       button.addEventListener("click", () => {
-        if (!activePhoneScenario) return;
-        const isA = button.dataset.choice === "a";
-        choiceResult.textContent = isA ? activePhoneScenario.ra : activePhoneScenario.rb;
-        playAmbientEffect(isA ? activePhoneScenario.soundA : activePhoneScenario.soundB);
-
-        if ((isA ? activePhoneScenario.soundA : activePhoneScenario.soundB) === "scream") {
+        const choice = button.dataset.choice;
+        if (choice === "answer") {
+          choiceResult.textContent = "“Geç kaldın. O zaten senin arkanda.”";
+          playAmbientEffect("laugh");
           setTimeout(() => {
             returnShadow.classList.add("show");
             setTimeout(() => returnShadow.classList.remove("show"), 1200);
-          }, 250);
+          }, 500);
+        } else {
+          choiceResult.textContent = "Hat kapandı. Ama telefon hâlâ çalıyor.";
+          playAmbientEffect("door");
         }
       });
-    });
     });
 
     function startAdvancedHorror() {
