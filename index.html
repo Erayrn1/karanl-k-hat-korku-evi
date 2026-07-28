@@ -11,6 +11,9 @@
   </script>
 
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
   
 <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/wZxsWpsS/favicon-32x32.png">
 <link rel="shortcut icon" href="https://i.ibb.co/wZxsWpsS/favicon-32x32.png">
@@ -35,6 +38,811 @@
   <meta name="twitter:image" content="https://r.resimlink.com/ljtEp3FX.png">
 
   <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EntertainmentBusiness",
+    "name": "Esenyurt Karanlık Hat Korku Evi",
+    "url": "https://www.xn--karanlkhatkorkuevi-j0c.com",
+    "logo": "https://r.resimlink.com/ljtEp3FX.png",
+    "telephone": "+90 533 484 2521",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Namık Kemal, 15. Sk. No:1/A D:1",
+      "addressLocality": "Esenyurt",
+      "addressRegion": "İstanbul",
+      "postalCode": "34513",
+      "addressCountry": "TR"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #080507;
+      --panel: rgba(18, 11, 15, .84);
+      --panel-strong: rgba(10, 7, 9, .94);
+      --line: rgba(255, 255, 255, .11);
+      --text: #f7f3f4;
+      --muted: #b9afb2;
+      --red: #e20f27;
+      --red-dark: #760918;
+      --red-glow: rgba(226, 15, 39, .35);
+      --gold: #d8b26a;
+      --radius: 20px;
+      --shadow: 0 22px 70px rgba(0, 0, 0, .52);
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Montserrat", Arial, sans-serif;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(120, 10, 26, .22), transparent 35%),
+        var(--bg);
+    }
+
+   body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background:
+        linear-gradient(rgba(6,3,5,.15), rgba(6,3,5,.45)),
+        url("https://i.ibb.co/Pvv0cGMQ/Chat-GPT-mage-27-Tem-2026-06-37-04.png")
+        center center / cover no-repeat;
+}
+    
+}
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 35%, rgba(0,0,0,.35) 100%)
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,.014) 0,
+          rgba(255,255,255,.014) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 12px;
+      top: -60px;
+      z-index: 9999;
+      padding: 10px 14px;
+      background: #fff;
+      color: #000;
+      border-radius: 8px;
+      transition: top .2s;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    /* Giriş ekranı */
+    #entry-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(130, 10, 30, .22), transparent 26%),
+        #080507;
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+
+    #entry-screen.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .entry-card {
+      width: min(92vw, 520px);
+      text-align: center;
+      position: relative;
+      padding: 280px 28px 30px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(20,12,16,.75), rgba(8,5,7,.95));
+      box-shadow: 0 30px 100px rgba(0,0,0,.7);
+      overflow: hidden;
+    }
+
+    .entry-card::before{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    top:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:url("https://i.ibb.co/whYprFhG/Chat-GPT-mage-27-Tem-2026-07-53-03.png") center/contain no-repeat;
+    filter:drop-shadow(0 0 35px rgba(226,15,39,.45));
+    animation:phonePulse 2s infinite ease-in-out;
+}
+
+    @keyframes phonePulse {
+      0%,100% { transform: translateX(-50%) rotate(-4deg) scale(1); }
+      30% { transform: translateX(-50%) rotate(5deg) scale(1.04); }
+      65% { transform: translateX(-50%) rotate(-3deg) scale(1.07); }
+    }
+
+    .entry-title {
+      margin: 0 0 10px;
+      font-family: "Creepster", cursive;
+      font-size: clamp(2rem, 7vw, 3.4rem);
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 24px var(--red-glow);
+    }
+
+    .entry-subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .entry-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      padding: 13px 18px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      text-decoration: none;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--red), var(--red-dark));
+      color: #fff;
+      box-shadow: 0 12px 30px var(--red-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.14);
+      color: #fff;
+    }
+
+    #alay-msg {
+      min-height: 24px;
+      margin: 14px 0 0;
+      color: #ff6272;
+      font-family: "Creepster", cursive;
+      font-size: 1.18rem;
+    }
+
+    /* Üst menü */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 5, 7, .82);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 10px 40px rgba(0,0,0,.34);
+    }
+
+    .nav-inner {
+      width: min(calc(100% - 28px), var(--max));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      min-width: max-content;
+      text-decoration: none;
+            letter-spacing: .8px;
+    }
+    
+    .brand-logo{
+    height:42px;
+    width:auto;
+    display:block;
+}
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff3650 0 12%, #7b0b1b 13% 45%, #18080d 46%);
+      box-shadow: 0 0 25px var(--red-glow);
+    }
+
+    .brand span {
+      color: var(--red);
+    }
+
+    .nav-scroll {
+      flex: 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: max-content;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .nav-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 12px 13px;
+      border-radius: 10px;
+      font: inherit;
+      font-size: .92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      color: #fff;
+      background: rgba(226, 15, 39, .15);
+      box-shadow: inset 0 0 0 1px rgba(226,15,39,.28);
+    }
+
+    .nav-reservation {
+      min-width: max-content;
+      padding: 11px 15px;
+      font-size: .9rem;
+    }
+
+    /* Genel yerleşim */
+    .site-shell {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+      padding: 38px 0 0;
+    }
+
+    .section {
+      display: none;
+      animation: sectionIn .45s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes sectionIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(22,13,18,.86), rgba(10,7,9,.88));
+      box-shadow: var(--shadow);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top right, rgba(226,15,39,.12), transparent 32%),
+        linear-gradient(120deg, rgba(255,255,255,.025), transparent 45%);
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+      padding: clamp(24px, 4vw, 48px);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "Creepster", cursive;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      line-height: .95;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 28px var(--red-glow);
+    }
+
+    .section-lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.8;
+    }
+
+    /* Ana sayfa */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      min-height: 590px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+   .hero-main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(180deg, rgba(5,3,4,.05), rgba(5,3,4,.55)),
+        url("https://i.ibb.co/Pvv0cGMQ/Chat-GPT-mage-27-Tem-2026-06-37-04.png")
+        center / cover no-repeat;
+}
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: "Nosifer", cursive;
+            font-size: clamp(3.2rem, 9vw, 7rem);
+      line-height: .86;
+      letter-spacing: 3px;
+      text-shadow: 0 0 34px rgba(226,15,39,.4);
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--red);
+    }
+
+    .hero-slogan {
+      margin: 22px 0 0;
+      color: #eee5e7;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      line-height: 1.65;
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .info-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mini-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .contact-list a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .contact-list i {
+      width: 22px;
+      color: var(--red);
+    }
+
+    .map-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .map-card iframe {
+      display: block;
+      width: 100%;
+      height: 280px;
+      border: 0;
+    }
+
+    /* İçerik blokları */
+    .content-card {
+      margin-top: 28px;
+      padding: clamp(20px, 3vw, 30px);
+      border-left: 3px solid var(--red);
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      color: #eee8ea;
+      line-height: 1.8;
+    }
+
+    .story-text em {
+      color: #ff697a;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .levels-grid,
+    .gallery-grid,
+    .feature-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .levels-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .level-card,
+    .faq-item,
+    .rule-item,
+    .feature-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .level-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .level-number {
+      font-size: .78rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .level-card h3 {
+      margin: 9px 0 12px;
+      font-family: "Creepster", cursive;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .level-card ul {
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .level-card .btn {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .rules-list,
+    .faq-list {
+      display: grid;
+      gap: 13px;
+      margin-top: 26px;
+    }
+
+    .rule-item,
+    .faq-item {
+      padding: 18px 20px;
+    }
+
+    .rule-item {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #eee8ea;
+      line-height: 1.65;
+    }
+
+    .rule-item i {
+      color: var(--red);
+      margin-top: 3px;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font: inherit;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      display: none;
+      padding-top: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-question i {
+      transform: rotate(45deg);
+    }
+
+    .faq-question i {
+      color: var(--red);
+      transition: transform .2s;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-grid button {
+      padding: 0;
+      border: 0;
+      border-radius: 15px;
+      overflow: hidden;
+      background: transparent;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(0,0,0,.3);
+    }
+
+    .gallery-grid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: brightness(.78) saturate(.82);
+      transition: transform .3s, filter .3s;
+    }
+
+    .gallery-grid button:hover img {
+      transform: scale(1.04);
+      filter: brightness(1) saturate(1);
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .feature-card {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .feature-card strong {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--red);
+    }
+
+    .feature-card span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .social-row a {
+      min-width: 150px;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(92vw, 520px);
+      max-height: 88vh;
+      overflow: auto;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #120b0f;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .modal-card h3 {
+      margin: 0 44px 12px 0;
+      font-family: "Creepster", cursive;
+      font-size: 2.4rem;
+    }
+
+    .modal-card ul {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .lightbox-card {
+      width: min(96vw, 980px);
+      padding: 12px;
+      background: #050304;
+    }
+
+    .lightbox-card img {
+      display: block;
+      width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    footer {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 34px auto 0;
+      padding: 28px 0 40px;
+      text-align: center;
+      color: #8d8386;
+      font-size: .86rem;
+    }
+
+
+    /* Tek seferlik jumpscare */
+    #jumpscare {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      background: #000;
+    }
+
+    #jumpscare.active {
+      visibility: visible;
+      animation: jumpscareFlash 1.15s ease-out forwards;
+    }
+
+    .jumpscare-face {
+      width: min(92vw, 760px);
+      aspect-ratio: 1 / 1;
+      background:
+        radial-gradient(circle at center, transparent 25%, rgba(0,0,0,.28) 65%, #000 100%),
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZyIgY3g9IjUwJSIgY3k9IjQyJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNkOGQ4ZDgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI0NSUiIHN0b3AtY29sb3I9IiM3NzciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDUwNTA1Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNCIvPjwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAwMCIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIzOTAiIHJ4PSIyNTAiIHJ5PSIzMjAiIGZpbGw9InVybCgjZykiLz4KICA8ZWxsaXBzZSBjeD0iMzEwIiBjeT0iMzMwIiByeD0iNjUiIHJ5PSI5NSIgZmlsbD0iIzA1MDUwNSIvPgogIDxlbGxpcHNlIGN4PSI0OTAiIGN5PSIzMzAiIHJ4PSI2NSIgcnk9Ijk1IiBmaWxsPSIjMDUwNTA1Ii8+CiAgPGNpcmNsZSBjeD0iMzEwIiBjeT0iMzQ1IiByPSIxMiIgZmlsbD0iI2ZmZiIvPgogIDxjaXJjbGUgY3g9IjQ5MCIgY3k9IjM0NSIgcj0iMTIiIGZpbGw9IiNmZmYiLz4KICA8cGF0aCBkPSJNMjYwIDU2MCBRNDAwIDY5MCA1NDAgNTYwIFE0OTAgNzQwIDQwMCA3NTAgUTMxMCA3NDAgMjYwIDU2MFoiIGZpbGw9IiMwNTA1MDUiLz4KICA8c  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "EntertainmentBusiness",
