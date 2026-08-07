@@ -468,7 +468,7 @@
     .hero-title {
       margin: 0;
       font-family: "Nosifer", cursive;
-            font-size: clamp(3.2rem, 9vw, 7rem);
+            font-size: clamp(2.56rem, 7.2vw, 5.6rem);
       line-height: .86;
       letter-spacing: 3px;
       text-shadow: 0 0 34px rgba(226,15,39,.4);
@@ -1908,6 +1908,24 @@
       startAdvancedHorror();
     }
 
+    // Vintage rotary phone ring — plays automatically on page load
+    const phoneRingAudio = document.getElementById("phone-ring-audio");
+    if (phoneRingAudio) {
+      phoneRingAudio.volume = 0.45;
+      document.addEventListener("DOMContentLoaded", () => {
+        phoneRingAudio.play().catch(() => {});
+      });
+      // DOMContentLoaded may already have fired if script runs after it
+      if (document.readyState !== "loading") {
+        phoneRingAudio.play().catch(() => {});
+      }
+    }
+
   </script>
+
+  <!-- Vintage rotary phone ring sound -->
+  <audio id="phone-ring-audio" preload="auto" loop>
+    <source src="https://cdn.freesound.org/previews/218/218995_1676145-lq.mp3" type="audio/mpeg">
+  </audio>
 </body>
 </html>
