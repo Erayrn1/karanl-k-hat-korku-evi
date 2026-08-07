@@ -1,0 +1,236 @@
+/* Page Specific Styles */
+
+.page-header {
+    margin-bottom: 40px;
+    animation: slideIn 0.6s ease-out;
+}
+
+.page-header h2 {
+    font-size: 32px;
+    color: #f7f3f4;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(226, 15, 39, 0.3);
+}
+
+.page-header p {
+    font-size: 16px;
+    color: rgba(247, 243, 244, 0.7);
+}
+
+/* Gallery Manager */
+.gallery-manager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.upload-section,
+.photos-list {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a0a0a 100%);
+    border: 2px solid #e20f27;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(226, 15, 39, 0.2);
+}
+
+.upload-section h3,
+.photos-list h3 {
+    color: #f7f3f4;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.gallery-items {
+    display: grid;
+    gap: 15px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.gallery-item {
+    background: rgba(226, 15, 39, 0.1);
+    border: 1px solid rgba(226, 15, 39, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.gallery-item-info {
+    flex: 1;
+}
+
+.gallery-item-url {
+    color: #f7f3f4;
+    font-size: 12px;
+    word-break: break-all;
+    margin-bottom: 5px;
+}
+
+.gallery-item-desc {
+    color: rgba(247, 243, 244, 0.6);
+    font-size: 12px;
+}
+
+.delete-btn {
+    padding: 6px 12px;
+    background: #e20f27;
+    color: #f7f3f4;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.delete-btn:hover {
+    background: #ff4444;
+    box-shadow: 0 0 15px rgba(226, 15, 39, 0.4);
+}
+
+/* Contact Manager */
+.contact-manager,
+.content-manager {
+    max-width: 700px;
+}
+
+.contact-form,
+.content-form {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a0a0a 100%);
+    border: 2px solid #e20f27;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(226, 15, 39, 0.2);
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+.form-section h3 {
+    color: #f7f3f4;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #f7f3f4;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e20f27;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f7f3f4;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff4444;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(226, 15, 39, 0.4);
+}
+
+.save-btn {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #e20f27 0%, #c40820 100%);
+    color: #f7f3f4;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(226, 15, 39, 0.4);
+    margin-top: 20px;
+    width: 100%;
+}
+
+.save-btn:hover {
+    background: linear-gradient(135deg, #ff4444 0%, #e20f27 100%);
+    box-shadow: 0 0 30px rgba(226, 15, 39, 0.6);
+    transform: translateY(-2px);
+}
+
+.levels-container {
+    display: grid;
+    gap: 20px;
+}
+
+.level-form {
+    background: rgba(226, 15, 39, 0.1);
+    border: 1px solid rgba(226, 15, 39, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.level-form h4 {
+    color: #f7f3f4;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gallery-manager {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .save-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h2 {
+        font-size: 24px;
+    }
+
+    .upload-section,
+    .photos-list,
+    .contact-form,
+    .content-form {
+        padding: 20px;
+    }
+
+    .gallery-items {
+        max-height: 400px;
+    }
+}

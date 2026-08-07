@@ -1,163 +1,45 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <link rel="stylesheet" href="admin.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karanlık Hat | Yönetim Paneli</title>
-
+    <title>Admin Panel Giriş - Karanlık Hat Korku Evi</title>
     <link rel="stylesheet" href="css/style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
-
 </head>
-
 <body>
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Admin Panel</h1>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Kullanıcı adınızı girin"
+                        required
+                    >
+                </div>
 
-<div class="layout">
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Şifrenizi girin"
+                        required
+                    >
+                </div>
 
-    <!-- Sidebar -->
+                <div id="errorMessage" class="error-message"></div>
 
-    <aside class="sidebar">
-
-        <div class="logo">
-
-            <h2>🩸 KARANLIK HAT</h2>
-
-            <span>Yönetim Paneli</span>
-
+                <button type="submit" class="login-btn">GİRİŞ YAP</button>
+            </form>
         </div>
+    </div>
 
-        <nav>
-
-            <ul>
-
-                <li class="active" data-page="dashboard">
-                    <i class="ri-dashboard-line"></i>
-                    Dashboard
-                </li>
-
-                <li data-page="homepage">
-                    <i class="ri-home-5-line"></i>
-                    Ana Sayfa
-                </li>
-
-                <li data-page="story">
-                    <i class="ri-book-open-line"></i>
-                    Oyun Hikayesi
-                </li>
-
-                <li data-page="levels">
-                    <i class="ri-skull-line"></i>
-                    Seviyeler
-                </li>
-
-                <li data-page="gallery">
-                    <i class="ri-image-line"></i>
-                    Albüm
-                </li>
-
-                <li data-page="faq">
-                    <i class="ri-question-answer-line"></i>
-                    S.S.S
-                </li>
-
-                <li data-page="about">
-                    <i class="ri-information-line"></i>
-                    Hakkımızda
-                </li>
-
-                <li data-page="settings">
-                    <i class="ri-settings-3-line"></i>
-                    Ayarlar
-                </li>
-
-            </ul>
-
-        </nav>
-
-    </aside>
-
-    <!-- Main -->
-
-    <main class="main">
-
-        <!-- Topbar -->
-
-        <header class="topbar">
-
-            <div>
-
-                <h1>Dashboard</h1>
-
-                <p>Karanlık Hat Korku Evi Yönetim Sistemi</p>
-
-            </div>
-
-            <div class="user">
-
-                <span>👤 Eray</span>
-
-            </div>
-
-        </header>
-
-        <!-- İçerik -->
-
-        <section id="content">
-
-            <!-- Dashboard -->
-
-            <div class="page active" id="dashboard">
-
-                <div class="cards">
-
-                    <div class="card">
-                        <h3>🌍 Site Durumu</h3>
-                        <p>Yayında</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>📸 Albüm</h3>
-                        <p>0 Fotoğraf</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>❓ S.S.S</h3>
-                        <p>0 Soru</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>👹 Seviyeler</h3>
-                        <p>3 Seviye</p>
-                    </div>
-
-                </div>
-
-                <div class="welcome">
-
-                    <h2>Hoş Geldin 👋</h2>
-
-                    <p>
-
-                        Sol menüden istediğin bölümü seçerek
-                        siteni yönetebilirsin.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-<script src="js/app.js"></script>
-
+    <script src="js/app.js"></script>
 </body>
 </html>

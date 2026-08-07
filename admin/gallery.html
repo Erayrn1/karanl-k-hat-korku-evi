@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Yönetimi - Admin Panel</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h1>Admin Panel</h1>
+            </div>
+            <div class="navbar-menu">
+                <a href="dashboard.html" class="nav-item">Anasayfa</a>
+                <a href="gallery.html" class="nav-item active">Galeri</a>
+                <a href="contact.html" class="nav-item">İletişim</a>
+                <a href="content.html" class="nav-item">İçerik</a>
+                <button onclick="logout()" class="nav-item logout-btn">Çıkış Yap</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="page-header">
+                <h2>🖼️ Galeri Yönetimi</h2>
+                <p>Korku evi fotoğraflarını yönetin</p>
+            </div>
+
+            <div class="gallery-manager">
+                <div class="upload-section">
+                    <h3>Yeni Fotoğraf Ekle</h3>
+                    <div class="form-group">
+                        <label>Fotoğraf URL'si</label>
+                        <input type="text" id="photoUrl" placeholder="Fotoğrafın URL'sini girin">
+                    </div>
+                    <div class="form-group">
+                        <label>Açıklama (Opsiyonel)</label>
+                        <input type="text" id="photoDesc" placeholder="Fotoğraf açıklaması">
+                    </div>
+                    <button onclick="addPhoto()" class="save-btn">Fotoğraf Ekle</button>
+                </div>
+
+                <div class="photos-list">
+                    <h3>Galeri Fotoğrafları</h3>
+                    <div id="galleryContainer" class="gallery-items">
+                        <!-- Fotoğraflar burada gösterilecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

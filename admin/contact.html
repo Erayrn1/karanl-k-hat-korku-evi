@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim Bilgileri - Admin Panel</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h1>Admin Panel</h1>
+            </div>
+            <div class="navbar-menu">
+                <a href="dashboard.html" class="nav-item">Anasayfa</a>
+                <a href="gallery.html" class="nav-item">Galeri</a>
+                <a href="contact.html" class="nav-item active">İletişim</a>
+                <a href="content.html" class="nav-item">İçerik</a>
+                <button onclick="logout()" class="nav-item logout-btn">Çıkış Yap</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="page-header">
+                <h2>📞 İletişim Bilgileri</h2>
+                <p>İletişim bilgilerini güncelleyin</p>
+            </div>
+
+            <div class="contact-manager">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-section">
+                        <h3>Temel Bilgiler</h3>
+                        
+                        <div class="form-group">
+                            <label>Telefon Numarası</label>
+                            <input type="tel" id="phone" placeholder="+90 (555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Adresi</label>
+                            <input type="email" id="email" placeholder="info@karanlikhat.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Adres</label>
+                            <input type="text" id="address" placeholder="Namık Kemal, 15. Sk. No:1/A D:1">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Konum Bilgileri</h3>
+                        
+                        <div class="form-group">
+                            <label>Şehir</label>
+                            <input type="text" id="city" placeholder="Esenyurt">
+                        </div>
+
+                        <div class="form-group">
+                            <label>İl</label>
+                            <input type="text" id="province" placeholder="İstanbul">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Posta Kodu</label>
+                            <input type="text" id="postalCode" placeholder="34513">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Sosyal Medya</h3>
+                        
+                        <div class="form-group">
+                            <label>Instagram</label>
+                            <input type="text" id="instagram" placeholder="https://instagram.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Facebook</label>
+                            <input type="text" id="facebook" placeholder="https://facebook.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>TikTok</label>
+                            <input type="text" id="tiktok" placeholder="https://tiktok.com/@...">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="save-btn">Değişiklikleri Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
