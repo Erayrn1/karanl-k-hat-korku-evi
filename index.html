@@ -1131,6 +1131,7 @@
       }
     }
   </style>
+  <script src="admin/sync.js"></script>
 </head>
 
 <body>
@@ -1158,6 +1159,7 @@
 </a>
 
       <div class="nav-scroll">
+        <li><a href="admin/" class="nav-btn" title="Admin Panel">⚙️ ADMİN</a></li>
         <ul class="nav-list">
           <li><button class="nav-btn active" data-section="home">Ana Sayfa</button></li>
           <li><button class="nav-btn" data-section="hikaye">Oyun Hikâyesi</button></li>
@@ -1185,8 +1187,8 @@
           <div class="section-inner">
             <div class="hero-copy">
               <p class="eyebrow">Esenyurt • İstanbul</p>
-              <h2 class="hero-title">KARANLIK <span>HAT</span></h2>
-              <p class="hero-slogan">
+              <h2 class="hero-title" data-admin-title>KARANLIK <span>HAT</span></h2>
+              <p class="hero-slogan" data-admin-slogan>
                 Gerçeğin kabusa dönüştüğü yer. Telefon çalarsa cevap vermek zorundasın.
                 Çünkü bazı kapılar yalnızca korkuyla açılır.
               </p>
@@ -1212,9 +1214,9 @@
 
           <div class="mini-card">
             <h3>Adres</h3>
-            <p>Namık Kemal, 15. Sk. No:1/A D:1, 34513 Esenyurt/İstanbul</p>
+            <p data-admin-address>Namık Kemal, 15. Sk. No:1/A D:1, 34513 Esenyurt/İstanbul</p>
             <div class="contact-list">
-              <a href="tel:+905334842521"><i class="fa-solid fa-phone"></i> +90 533 484 2521</a>
+              <a href="tel:+905334842521" data-admin-phone><i class="fa-solid fa-phone"></i> +90 533 484 2521</a>
               <a href="https://wa.me/905333814921" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> +90 533 381 4921</a>
               <a href="https://www.instagram.com/karanlikhatkorkuevi?igsh=NnAwdHJnempxcTRu" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @karanlikhatkorkuevi</a>
             </div>
@@ -1383,9 +1385,9 @@
           </p>
 
           <div class="feature-grid">
-            <div class="feature-card"><strong>11</strong><span>Oda</span></div>
-            <div class="feature-card"><strong>1</strong><span>Koridor</span></div>
-            <div class="feature-card"><strong>2</strong><span>Tünel Girişi</span></div>
+            <div class="feature-card" data-admin-feature="1"><strong>11</strong><span>Oda</span></div>
+            <div class="feature-card" data-admin-feature="2"><strong>1</strong><span>Koridor</span></div>
+            <div class="feature-card" data-admin-feature="3"><strong>2</strong><span>Tünel Girişi</span></div>
             <div class="feature-card"><strong>60</strong><span>Dakikaya Kadar</span></div>
           </div>
 
