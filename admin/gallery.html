@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/pages.css">
     <style>
+        /* ── Upload area ── */
         .upload-section {
             background: rgba(255,255,255,.05);
             border: 2px dashed #e20f27;
@@ -14,23 +15,15 @@
             border-radius: 12px;
             margin-bottom: 30px;
             text-align: center;
+            transition: background .2s, border-color .2s;
         }
-
         .upload-section.drag-over {
             background: rgba(226,15,39,.15);
             border-color: #ff3650;
         }
 
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-            margin: 15px 0;
-        }
-
-        .file-input-wrapper input[type="file"] {
-            display: none;
-        }
-
+        /* ── File input ── */
+        .file-input-wrapper input[type="file"] { display: none; }
         .file-input-label {
             display: inline-block;
             padding: 12px 28px;
@@ -40,84 +33,99 @@
             cursor: pointer;
             font-weight: 700;
             transition: transform .2s;
+            margin: 15px 0;
         }
+        .file-input-label:hover { transform: translateY(-2px); }
 
-        .file-input-label:hover {
-            transform: translateY(-2px);
-        }
-
-        .file-preview {
-            margin-top: 15px;
-            max-width: 200px;
-            max-height: 200px;
-            border-radius: 8px;
+        /* ── Preview & confirm area ── */
+        .preview-area {
             display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(255,255,255,.04);
+            border-radius: 10px;
         }
-
-        .file-preview.show {
-            display: block;
-        }
-
-        .gallery-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
+        .preview-area.show { display: flex; }
+        .preview-area img {
+            max-width: 220px;
+            max-height: 220px;
             border-radius: 8px;
-            overflow: hidden;
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(255,255,255,.1);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 200px;
             object-fit: cover;
-            display: block;
+            border: 2px solid rgba(226,15,39,.5);
         }
-
-        .gallery-item-info {
-            padding: 12px;
-        }
-
-        .gallery-item-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .gallery-item-actions button {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 6px;
+        .preview-filename {
             font-size: .85rem;
+            color: #b9afb2;
+        }
+        .preview-desc input {
+            width: 100%;
+            max-width: 320px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 6px;
+            color: #fff;
+            font-size: .9rem;
+        }
+        .preview-desc input::placeholder { color: #888; }
+        .preview-actions { display: flex; gap: 12px; }
+        .confirm-btn {
+            padding: 10px 24px;
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
-            transition: .2s;
+            transition: transform .2s;
         }
-
-        .delete-btn {
-            background: #e20f27;
+        .confirm-btn:hover { transform: translateY(-2px); }
+        .cancel-btn {
+            padding: 10px 24px;
+            background: rgba(255,255,255,.1);
             color: #fff;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .cancel-btn:hover { background: rgba(255,255,255,.18); }
+
+        /* ── Progress ── */
+        .upload-progress { display: none; margin-top: 15px; }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e20f27, #ff3650);
+            width: 0%;
+            transition: width .3s;
         }
 
-        .delete-btn:hover {
-            background: #760918;
+        /* ── Spinner ── */
+        .spinner {
+            display: none;
+            width: 28px;
+            height: 28px;
+            border: 3px solid rgba(226,15,39,.3);
+            border-top-color: #e20f27;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            margin: 0 auto;
         }
+        .spinner.show { display: block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .copy-btn {
-            background: rgba(226,15,39,.2);
-            color: #fff;
-        }
-
-        .copy-btn:hover {
-            background: rgba(226,15,39,.35);
-        }
-
+        /* ── Messages ── */
         .success-msg {
             background: rgba(34,197,94,.15);
             border: 1px solid #22c55e;
@@ -127,38 +135,74 @@
             margin-top: 10px;
             display: none;
         }
+        .success-msg.show { display: block; }
+        .error-msg {
+            background: rgba(226,15,39,.15);
+            border: 1px solid #e20f27;
+            color: #ff6b6b;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+        .error-msg.show { display: block; }
 
-        .success-msg.show {
+        /* ── Gallery grid ── */
+        .gallery-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
             display: block;
         }
-
-        .upload-progress {
-            display: none;
-            margin-top: 15px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,.1);
-            border-radius: 3px;
+        .gallery-item-info { padding: 10px 12px; }
+        .gallery-item-desc {
+            font-size: .8rem;
+            color: #b9afb2;
+            margin-bottom: 4px;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
         }
+        .gallery-item-date { font-size: .75rem; color: #776e72; }
+        .gallery-item-actions { display: flex; gap: 8px; margin-top: 8px; }
+        .gallery-item-actions button {
+            flex: 1;
+            padding: 7px;
+            border: none;
+            border-radius: 6px;
+            font-size: .8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .delete-btn { background: #e20f27; color: #fff; }
+        .delete-btn:hover { background: #760918; }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #e20f27, #ff3650);
-            width: 0%;
-            transition: width .3s;
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #776e72;
+            padding: 40px 0;
+            font-size: .95rem;
         }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
         <nav class="navbar">
-            <div class="navbar-brand">
-                <h1>Admin Panel</h1>
-            </div>
+            <div class="navbar-brand"><h1>Admin Panel</h1></div>
             <div class="navbar-menu">
                 <a href="dashboard.html" class="nav-item">Anasayfa</a>
                 <a href="gallery.html" class="nav-item active">Galeri</a>
@@ -175,179 +219,60 @@
             </div>
 
             <div class="gallery-manager">
+
+                <!-- Upload area -->
                 <div class="upload-section" id="uploadSection">
                     <h3>📁 Dosyadan Fotoğraf Yükle</h3>
-                    <p style="color: #b9afb2; font-size: .9rem; margin: 10px 0;">
-                        JPG, PNG, WebP formatında fotoğraf yükleyebilirsiniz (Max 5MB)
+                    <p style="color:#b9afb2;font-size:.9rem;margin:8px 0 0;">
+                        JPG, PNG, WebP — maks. 5 MB &nbsp;•&nbsp; Sürükle-bırak desteklenir
                     </p>
-                    
+
                     <div class="file-input-wrapper">
-                        <input type="file" id="fileInput" accept="image/*" multiple>
-                        <label for="fileInput" class="file-input-label">📤 Fotoğraf Seç</label>
+                        <input type="file" id="fileInput" accept="image/*">
+                        <label for="fileInput" class="file-input-label" id="fileInputLabel">📤 Fotoğraf Seç</label>
                     </div>
 
-                    <img id="filePreview" class="file-preview" alt="Ön izleme">
-                    
+                    <!-- Preview + confirm/cancel -->
+                    <div class="preview-area" id="previewArea">
+                        <img id="previewImg" src="" alt="Önizleme">
+                        <span class="preview-filename" id="previewFilename"></span>
+                        <div class="preview-desc">
+                            <input type="text" id="photoDesc" placeholder="Açıklama ekle (opsiyonel)">
+                        </div>
+                        <div class="preview-actions">
+                            <button class="confirm-btn" id="confirmBtn">✅ Onayla &amp; Ekle</button>
+                            <button class="cancel-btn" id="cancelBtn">❌ İptal</button>
+                        </div>
+                    </div>
+
+                    <!-- Spinner -->
+                    <div class="spinner" id="spinner"></div>
+
+                    <!-- Progress bar -->
                     <div class="upload-progress" id="uploadProgress">
-                        <p style="font-size: .85rem;">Yükleniyor...</p>
+                        <p style="font-size:.85rem;margin-bottom:6px;">Okunuyor…</p>
                         <div class="progress-bar">
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
                     </div>
 
-                    <div class="success-msg" id="successMsg">✅ Fotoğraf başarıyla yüklendi!</div>
+                    <div class="success-msg" id="successMsg">✅ Fotoğraf başarıyla eklendi!</div>
+                    <div class="error-msg" id="errorMsg"></div>
                 </div>
 
+                <!-- Photo list -->
                 <div class="photos-list">
                     <h3>📸 Galeri Fotoğrafları (<span id="photoCount">0</span>)</h3>
                     <div id="galleryContainer" class="gallery-items">
-                        <!-- Fotoğraflar burada gösterilecek -->
+                        <p class="empty-state">Henüz fotoğraf eklenmemiş</p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
     <script src="js/app.js"></script>
     <script src="js/gallery.js"></script>
-    <script>
-        // Dosya yükleme sistemi
-        const fileInput = document.getElementById('fileInput');
-        const filePreview = document.getElementById('filePreview');
-        const uploadProgress = document.getElementById('uploadProgress');
-        const progressFill = document.getElementById('progressFill');
-        const successMsg = document.getElementById('successMsg');
-        const uploadSection = document.getElementById('uploadSection');
-        const galleryContainer = document.getElementById('galleryContainer');
-
-        // Base64 PNG 1x1 placeholder
-        const PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
-
-        // Dosya yükleme
-        fileInput.addEventListener('change', handleFileSelect);
-        uploadSection.addEventListener('dragover', handleDragOver);
-        uploadSection.addEventListener('dragleave', handleDragLeave);
-        uploadSection.addEventListener('drop', handleDrop);
-
-        function handleFileSelect(e) {
-            const files = e.target.files;
-            if (files.length > 0) {
-                uploadFiles(files);
-            }
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            uploadSection.classList.add('drag-over');
-        }
-
-        function handleDragLeave(e) {
-            e.preventDefault();
-            uploadSection.classList.remove('drag-over');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            uploadSection.classList.remove('drag-over');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                uploadFiles(files);
-            }
-        }
-
-        function uploadFiles(files) {
-            let uploaded = 0;
-
-            for (let file of files) {
-                if (!file.type.startsWith('image/')) {
-                    alert('Lütfen yalnız resim dosyaları seçiniz!');
-                    continue;
-                }
-
-                if (file.size > 5 * 1024 * 1024) {
-                    alert(`${file.name} 5MB\'dan büyük!`);
-                    continue;
-                }
-
-                const reader = new FileReader();
-                reader.onprogress = (e) => {
-                    if (e.lengthComputable) {
-                        const percent = (e.loaded / e.total) * 100;
-                        progressFill.style.width = percent + '%';
-                    }
-                };
-
-                reader.onload = (e) => {
-                    const base64 = e.target.result;
-                    
-                    // Base64 data URL olarak localStorage'a kaydet
-                    let gallery = JSON.parse(localStorage.getItem('adminGallery') || '[]');
-                    gallery.push({
-                        id: Date.now() + Math.random(),
-                        url: base64,
-                        type: 'local',
-                        uploadedAt: new Date().toLocaleString('tr-TR')
-                    });
-                    localStorage.setItem('adminGallery', JSON.stringify(gallery));
-
-                    uploaded++;
-                    if (uploaded === files.length) {
-                        uploadProgress.style.display = 'none';
-                        successMsg.classList.add('show');
-                        setTimeout(() => successMsg.classList.remove('show'), 3000);
-                        loadGallery();
-                        fileInput.value = '';
-                    }
-                };
-
-                reader.onerror = () => {
-                    alert(`${file.name} okunamadı!`);
-                };
-
-                uploadProgress.style.display = 'block';
-                progressFill.style.width = '0%';
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function loadGallery() {
-            const gallery = JSON.parse(localStorage.getItem('adminGallery') || '[]');
-            galleryContainer.innerHTML = '';
-            document.getElementById('photoCount').textContent = gallery.length;
-
-            gallery.reverse().forEach(photo => {
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.innerHTML = `
-                    <img src="${photo.url}" alt="Galeri fotoğrafı">
-                    <div class="gallery-item-info">
-                        <small>${photo.uploadedAt}</small>
-                        <div class="gallery-item-actions">
-                            <button class="copy-btn" onclick="copyToClipboard('${photo.url.substring(0, 50)}...')">📋 URL Kopyala</button>
-                            <button class="delete-btn" onclick="deletePhoto(${photo.id})">🗑️ Sil</button>
-                        </div>
-                    </div>
-                `;
-                galleryContainer.appendChild(div);
-            });
-        }
-
-        function deletePhoto(id) {
-            if (confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
-                let gallery = JSON.parse(localStorage.getItem('adminGallery') || '[]');
-                gallery = gallery.filter(p => p.id !== id);
-                localStorage.setItem('adminGallery', JSON.stringify(gallery));
-                loadGallery();
-            }
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert('URL kopyalandı!');
-        }
-
-        // Sayfa yüklendiğinde galeriyi göster
-        window.addEventListener('load', loadGallery);
-    </script>
 </body>
 </html>

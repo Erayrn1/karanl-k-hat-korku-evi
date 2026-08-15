@@ -75,20 +75,44 @@ function updateSiteContent() {
     }
     
     // Galeriyi güncelle
-    if (data.gallery.length > 0) {
-        const galleryContainer = document.querySelector('.gallery-grid');
-        if (galleryContainer) {
-            galleryContainer.innerHTML = '';
-            data.gallery.forEach(photo => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                const img = document.createElement('img');
-                img.src = photo.url;
-                img.alt = photo.desc || 'Galeri fotoğrafı';
-                button.appendChild(img);
-                galleryContainer.appendChild(button);
-            });
-        }
+    updateGalleryGrid(data.gallery);
+}
+
+function updateGalleryGrid(galleryData) {
+    const galleryContainer = document.querySelector('.gallery-grid');
+    if (!galleryContainer) return;
+
+    // Orijinal fotoğrafları ilk çalışmada yedekle
+    if (!galleryContainer.dataset.originalBackup) {
+        galleryContainer.dataset.originalBackup = galleryContainer.innerHTML;
+    }
+
+    if (!galleryData || galleryData.length === 0) {
+        // Admin'de fotoğraf yoksa orijinal galeriye geri dön
+        galleryContainer.innerHTML = galleryContainer.dataset.originalBackup;
+        return;
+    }
+
+    // Admin fotoğraflarıyla galeriyi doldur
+    galleryContainer.innerHTML = '';
+    galleryData.forEach((photo, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'gallery-item';
+        button.dataset.src = photo.url;
+
+        const img = document.createElement('img');
+        img.src = photo.url;
+        img.alt = photo.desc || ('Korku evi albüm görseli ' + (index + 1));
+        img.loading = 'lazy';
+
+        button.appendChild(img);
+        galleryContainer.appendChild(button);
+    });
+
+    // Lightbox event'lerini yeniden bağla (varsa)
+    if (typeof initGalleryLightbox === 'function') {
+        initGalleryLightbox();
     }
 }
 
