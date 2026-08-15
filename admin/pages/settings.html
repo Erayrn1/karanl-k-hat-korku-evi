@@ -64,6 +64,7 @@
 
             <section class="list-card">
                 <h3>Şifre Değiştir</h3>
+                <p class="muted">İlk kurulumdan sonra varsayılan şifreyi hemen güncelleyin.</p>
                 <form id="passwordForm" novalidate>
                     <div class="form-group"><label for="currentPassword">Mevcut Şifre</label><input id="currentPassword" type="password" required></div>
                     <div class="form-group"><label for="newPassword">Yeni Şifre</label><input id="newPassword" type="password" minlength="6" required></div>
@@ -133,7 +134,7 @@
         }
     });
 
-    passwordForm.addEventListener('submit', (event) => {
+    passwordForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!AdminApp.validateForm(passwordForm)) return;
 
@@ -141,8 +142,9 @@
         const next = document.getElementById('newPassword').value;
         const repeat = document.getElementById('newPasswordAgain').value;
         const credentials = AdminApp.getCredentials();
+        const currentHash = await AdminApp.hashPassword(current);
 
-        if (current !== credentials.password) {
+        if (currentHash !== credentials.passwordHash) {
             AdminApp.showToast('Mevcut şifre hatalı.', 'error');
             return;
         }
@@ -157,7 +159,7 @@
             return;
         }
 
-        AdminApp.updatePassword(next);
+        await AdminApp.updatePassword(next);
         passwordForm.reset();
         AdminApp.showToast('Şifre başarıyla güncellendi.');
     });

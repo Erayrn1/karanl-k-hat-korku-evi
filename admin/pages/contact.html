@@ -50,10 +50,10 @@
                     </div>
                     <div class="form-group"><label for="address">Adres</label><input id="address" required></div>
                     <div class="form-group"><label for="instagram">Instagram</label><input id="instagram" placeholder="https://instagram.com/..." required></div>
-                    <div class="form-group"><label for="mapEmbed">Harita Embed URL</label><input id="mapEmbed" placeholder="https://www.google.com/maps?q=...&output=embed" required></div>
+                    <div class="form-group"><label for="mapEmbed">Harita URL veya Adres Metni</label><input id="mapEmbed" placeholder="Google Maps linki veya adres metni" required></div>
                     <div class="footer-actions">
                         <button class="btn" type="submit">Kaydet</button>
-                        <button class="btn btn-secondary" type="button" id="testSendBtn">Test Gönder</button>
+                        <button class="btn btn-secondary" type="button" id="testSendBtn">Sunucu Testi Gönder</button>
                     </div>
                 </form>
             </section>
@@ -98,7 +98,8 @@
     }, {});
 
     const setMap = () => {
-        mapFrame.src = document.getElementById('mapEmbed').value.trim() || 'about:blank';
+        const value = document.getElementById('mapEmbed').value.trim();
+        mapFrame.src = AdminApp.buildMapEmbedSource(value);
     };
 
     const load = () => {
@@ -123,11 +124,11 @@
 
     testSendBtn.addEventListener('click', async () => {
         testSendBtn.disabled = true;
-        testStatus.textContent = 'Test gönderiliyor...';
-        const ok = await AdminApp.fakeFetch({ type: 'contact-test', payload: getFormData(), at: Date.now() });
+        testStatus.textContent = 'Sunucu bağlantısı test ediliyor...';
+        const ok = await AdminApp.sendTestPing({ type: 'contact-test' });
         testSendBtn.disabled = false;
-        testStatus.textContent = ok ? 'Test gönderimi başarılı.' : 'Test gönderimi başarısız.';
-        AdminApp.showToast(ok ? 'Test gönderimi başarılı.' : 'Test gönderimi başarısız.', ok ? 'success' : 'error');
+        testStatus.textContent = ok ? 'Sunucu bağlantı testi başarılı.' : 'Sunucu bağlantı testi başarısız.';
+        AdminApp.showToast(ok ? 'Sunucu bağlantı testi başarılı.' : 'Sunucu bağlantı testi başarısız.', ok ? 'success' : 'error');
     });
 
     load();

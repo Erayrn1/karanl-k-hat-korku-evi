@@ -325,6 +325,7 @@ a { color: inherit; }
 .live-preview h3 { margin-top: 0; color: var(--gold); }
 
 .sidebar-collapsed .admin-shell { grid-template-columns: 84px 1fr; }
+.sidebar-collapsed .sidebar { width: 84px; }
 .sidebar-collapsed .logo-title,
 .sidebar-collapsed .logo-subtitle,
 .sidebar-collapsed .nav-link span:last-child { display: none; }

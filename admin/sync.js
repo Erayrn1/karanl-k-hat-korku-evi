@@ -14,6 +14,12 @@
         }
     };
 
+    const getMapSource = (value) => {
+        if (window.AdminApp?.buildMapEmbedSource) return window.AdminApp.buildMapEmbedSource(value);
+        if (/^https:\/\/(www\.)?google\.[a-z.]+\/maps/i.test(String(value || ''))) return value;
+        return `https://www.google.com/maps?q=${encodeURIComponent(String(value || ''))}&output=embed`;
+    };
+
     const showSyncStatus = (message, type = 'success') => {
         const target = document.getElementById('sync-status');
         if (!target) return;
@@ -24,6 +30,8 @@
     const updateGallery = (gallery) => {
         const galleryGrid = document.querySelector('.gallery-grid');
         if (!galleryGrid || !Array.isArray(gallery) || !gallery.length) return;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
 
         galleryGrid.innerHTML = '';
         gallery.forEach((photo, index) => {
@@ -40,8 +48,6 @@
             button.appendChild(image);
             galleryGrid.appendChild(button);
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
             if (lightbox && lightboxImage) {
                 button.addEventListener('click', () => {
                     lightboxImage.src = photo.url;
@@ -133,7 +139,7 @@
         if (addressCard && contact.address) addressCard.textContent = contact.address;
 
         const mapFrame = document.querySelector('.map-card iframe');
-        if (mapFrame && contact.mapEmbed) mapFrame.src = contact.mapEmbed;
+        if (mapFrame && contact.mapEmbed) mapFrame.src = getMapSource(contact.mapEmbed);
     };
 
     const syncNow = () => {
@@ -155,7 +161,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         syncNow();
-        setInterval(syncNow, 5000);
     });
 
     window.addEventListener('storage', (event) => {
@@ -163,4 +168,6 @@
             syncNow();
         }
     });
+
+    window.addEventListener('admin:data-updated', syncNow);
 })();

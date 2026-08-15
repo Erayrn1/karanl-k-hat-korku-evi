@@ -149,6 +149,7 @@
             const card = document.createElement('article');
             card.className = 'preview-card';
             const img = document.createElement('img');
+            if (!String(item.preview).startsWith('blob:')) return;
             img.src = item.preview;
             img.alt = 'Önizleme';
             const body = document.createElement('div');
@@ -168,8 +169,15 @@
     };
 
     const acceptFiles = (files) => {
-        pendingFiles = Array.from(files)
+        const candidates = Array.from(files)
             .filter((file) => file.type.startsWith('image/'))
+            .filter((file) => file.size <= 2 * 1024 * 1024);
+
+        if (candidates.length !== files.length) {
+            AdminApp.showToast('2MB üstü görseller localStorage sınırı nedeniyle eklenmedi.', 'error');
+        }
+
+        pendingFiles = candidates
             .map((file) => ({
                 file,
                 preview: URL.createObjectURL(file)
@@ -221,7 +229,7 @@
         for (const item of pendingFiles) {
             const url = await toDataUrl(item.file);
             existing.push({
-                id: Date.now() + Math.random(),
+                id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
                 url,
                 desc: photoDesc.value.trim(),
                 uploadedAt: new Date().toLocaleString('tr-TR')
@@ -263,7 +271,7 @@
         const editId = event.target.getAttribute('data-edit');
 
         if (deleteId) {
-            const id = Number(deleteId);
+            const id = deleteId;
             const updated = AdminApp.getStorage(galleryKey, []).filter((item) => item.id !== id);
             AdminApp.setStorage(galleryKey, updated);
             AdminApp.addActivity('Bir fotoğraf silindi');
@@ -273,7 +281,7 @@
         }
 
         if (editId) {
-            const id = Number(editId);
+            const id = editId;
             const list = AdminApp.getStorage(galleryKey, []);
             const index = list.findIndex((item) => item.id === id);
             if (index < 0) return;

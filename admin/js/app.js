@@ -1,5 +1,5 @@
-const DEFAULT_ADMIN_USERNAME = 'erayrn';
-const DEFAULT_ADMIN_PASSWORD = 'erayrn321';
+const DEFAULT_ADMIN_USERNAME = 'admin';
+const DEFAULT_ADMIN_PASSWORD_HASH = '5c06eb3d5a05a19f49476d694ca81a36344660e9d5b98e3d6a6630f31c2422e7';
 const AUTH_TOKEN_KEY = 'admin_token_erayrn';
 const AUTH_CONFIG_KEY = 'adminAuthConfig';
 const ACTIVITY_KEY = 'adminActivity';
@@ -17,8 +17,14 @@ const AdminApp = {
         const saved = this.getStorage(AUTH_CONFIG_KEY, null);
         return {
             username: saved?.username || DEFAULT_ADMIN_USERNAME,
-            password: saved?.password || DEFAULT_ADMIN_PASSWORD
+            passwordHash: saved?.passwordHash || DEFAULT_ADMIN_PASSWORD_HASH
         };
+    },
+
+    async hashPassword(password) {
+        const bytes = new TextEncoder().encode(password);
+        const digest = await crypto.subtle.digest('SHA-256', bytes);
+        return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
     },
 
     checkAuth() {
@@ -39,15 +45,16 @@ const AdminApp = {
         const form = document.getElementById('loginForm');
         if (!form) return;
 
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
             const username = document.getElementById('username')?.value.trim();
             const password = document.getElementById('password')?.value;
             const errorEl = document.getElementById('errorMessage');
             const button = form.querySelector('button[type="submit"]');
             const credentials = this.getCredentials();
+            const passwordHash = await this.hashPassword(password || '');
 
-            if (username === credentials.username && password === credentials.password) {
+            if (username === credentials.username && passwordHash === credentials.passwordHash) {
                 button.disabled = true;
                 button.textContent = 'Giriş Yapılıyor...';
                 localStorage.setItem(AUTH_TOKEN_KEY, `authenticated_${Date.now()}`);
@@ -135,8 +142,8 @@ const AdminApp = {
 
         const statVisitors = document.getElementById('statVisitors');
         if (statVisitors) {
-            const seeded = 1200 + photos * 7 + (content.siteTitle ? 15 : 0);
-            statVisitors.textContent = seeded.toLocaleString('tr-TR');
+            const count = Number(localStorage.getItem('siteVisitorCount'));
+            statVisitors.textContent = Number.isFinite(count) && count > 0 ? count.toLocaleString('tr-TR') : '--';
         }
 
         const statUpdated = document.getElementById('statUpdated');
@@ -182,6 +189,17 @@ const AdminApp = {
         return true;
     },
 
+    isSafeMapUrl(value) {
+        return /^https:\/\/(www\.)?google\.[a-z.]+\/maps/i.test(String(value || ''));
+    },
+
+    buildMapEmbedSource(value) {
+        const raw = String(value || '').trim();
+        if (!raw) return 'about:blank';
+        if (this.isSafeMapUrl(raw)) return raw;
+        return `https://www.google.com/maps?q=${encodeURIComponent(raw)}&output=embed`;
+    },
+
     showToast(message, type = 'success') {
         const toast = document.getElementById('globalToast');
         if (!toast) {
@@ -195,9 +213,18 @@ const AdminApp = {
         setTimeout(() => toast.classList.remove('show'), 2200);
     },
 
-    async fakeFetch(payload) {
-        const response = await fetch(`data:application/json,${encodeURIComponent(JSON.stringify(payload))}`);
-        return response.ok;
+    async sendTestPing(payload) {
+        try {
+            const target = window.location.protocol === 'file:' ? 'https://www.google.com/generate_204' : `${window.location.origin}/`;
+            const response = await fetch(target, {
+                method: 'GET',
+                cache: 'no-store',
+                headers: { 'X-Admin-Test': String(payload?.type || 'admin-test') }
+            });
+            return response.ok || response.type === 'opaque';
+        } catch {
+            return false;
+        }
     },
 
     exportBackup() {
@@ -232,11 +259,12 @@ const AdminApp = {
         this.showToast('Yedek başarıyla geri yüklendi.');
     },
 
-    updatePassword(newPassword) {
+    async updatePassword(newPassword) {
         const credentials = this.getCredentials();
+        const passwordHash = await this.hashPassword(newPassword);
         this.setStorage(AUTH_CONFIG_KEY, {
             username: credentials.username,
-            password: newPassword
+            passwordHash
         });
         this.addActivity('Admin şifresi güncellendi');
     },
@@ -257,16 +285,20 @@ window.logout = () => AdminApp.logout();
 window.goToPage = (page) => { window.location.href = page; };
 window.syncData = () => {
     window.dispatchEvent(new CustomEvent('admin:data-updated'));
-    window.parent?.postMessage?.({ type: 'adminUpdate' }, '*');
+    if (window.location.origin === 'null') return;
+    const targetOrigin = window.location.origin;
+    window.parent?.postMessage?.({ type: 'adminUpdate' }, targetOrigin);
 };
 window.addEventListener('message', (event) => {
+    const sameOrigin = window.location.origin !== 'null' && event.origin === window.location.origin;
+    if (!sameOrigin) return;
     if (event?.data?.type !== 'requestAdminData') return;
     const adminData = {
         contact: AdminApp.getStorage(AdminApp.keys.contact, {}),
         content: AdminApp.getStorage(AdminApp.keys.content, {}),
         gallery: AdminApp.getStorage(AdminApp.keys.gallery, [])
     };
-    event.source?.postMessage?.({ type: 'adminData', data: adminData }, '*');
+    event.source?.postMessage?.({ type: 'adminData', data: adminData }, event.origin);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
