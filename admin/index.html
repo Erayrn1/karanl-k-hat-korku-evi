@@ -4,42 +4,248 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel Giriş - Karanlık Hat Korku Evi</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: min(92vw, 400px);
+        }
+        
+        .login-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, .7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(226, 15, 39, .05), transparent);
+            pointer-events: none;
+        }
+        
+        .login-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            margin: 0 0 10px;
+            font-size: 2.5rem;
+            color: var(--text);
+            text-shadow: 0 0 20px var(--red-glow);
+        }
+        
+        .login-header i {
+            font-size: 3rem;
+            color: var(--red);
+            text-shadow: 0 0 30px var(--red-glow);
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: .9rem;
+            letter-spacing: .5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: .95rem;
+            transition: var(--transition);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--red);
+            background: rgba(255, 255, 255, .08);
+            box-shadow: 0 0 15px var(--red-glow);
+        }
+        
+        input::placeholder {
+            color: var(--muted);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 20px var(--red-glow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--red-glow), 0 5px 20px rgba(0, 0, 0, .3);
+        }
+        
+        .login-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+        
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, .1);
+            border-left: 3px solid var(--error);
+            color: var(--error);
+            padding: 12px 14px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: .9rem;
+            animation: slideInDown .3s ease;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .shake {
+            animation: shake .4s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .demo-info {
+            margin-top: 30px;
+            padding: 14px;
+            background: rgba(226, 15, 39, .1);
+            border-left: 3px solid var(--red);
+            border-radius: 6px;
+            font-size: .85rem;
+            color: var(--muted);
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
         <div class="login-card">
-            <h1>Admin Panel</h1>
-            <form id="loginForm" class="login-form">
+            <div class="login-header">
+                <i class="fas fa-skull"></i>
+                <h1>Admin Panel</h1>
+            </div>
+            
+            <form id="loginForm">
                 <div class="form-group">
-                    <label for="username">Kullanıcı Adı</label>
+                    <label for="username">İletişim Adı</label>
                     <input 
                         type="text" 
                         id="username" 
-                        name="username" 
                         placeholder="Kullanıcı adınızı girin"
                         required
                     >
                 </div>
-
+                
                 <div class="form-group">
                     <label for="password">Şifre</label>
                     <input 
                         type="password" 
                         id="password" 
-                        name="password" 
                         placeholder="Şifrenizi girin"
                         required
                     >
                 </div>
-
+                
                 <div id="errorMessage" class="error-message"></div>
-
+                
                 <button type="submit" class="login-btn">GİRİŞ YAP</button>
             </form>
+            
+            <div class="demo-info">
+                <strong>Demo Giriş:</strong><br>
+                Kullanıcı: <code>erayrn</code><br>
+                Şifre: <code>erayrn321</code>
+            </div>
         </div>
     </div>
-
+    
     <script src="js/app.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+            const loginBtn = document.querySelector('.login-btn');
+            
+            errorMsg.classList.remove('show');
+            
+            if (username === 'erayrn' && password === 'erayrn321') {
+                loginBtn.disabled = true;
+                loginBtn.textContent = 'Giriş Yapılıyor...';
+                
+                localStorage.setItem('admin_token_erayrn', 'authenticated_' + Date.now());
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 500);
+            } else {
+                errorMsg.textContent = '❌ Kullanıcı adı veya şifre yanlış!';
+                errorMsg.classList.add('show');
+                
+                this.classList.add('shake');
+                setTimeout(() => this.classList.remove('shake'), 400);
+                
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
 </body>
 </html>

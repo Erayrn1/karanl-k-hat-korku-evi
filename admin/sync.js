@@ -1,54 +1,49 @@
 // Admin Sync - Ana site ile localStorage senkronizasyonu
 
 function loadAdminData() {
-    // İletişim bilgilerini yükle
-    const contactData = JSON.parse(localStorage.getItem('adminContact') || '{}');
-    
-    // İçerik verilerini yükle
-    const contentData = JSON.parse(localStorage.getItem('adminContent') || '{}');
-    
-    // Galeri verilerini yükle
-    const galleryData = JSON.parse(localStorage.getItem('adminGallery') || '[]');
-    
+    const adminData = JSON.parse(localStorage.getItem('adminData') || '{}');
     return {
-        contact: contactData,
-        content: contentData,
-        gallery: galleryData
+        gallery: adminData.gallery || [],
+        content: adminData.content || {},
+        contact: adminData.contact || {}
     };
 }
 
 function updateSiteContent() {
     const data = loadAdminData();
     
-    // İletişim bilgilerini güncelle
-    if (data.contact.phone) {
-        const phoneElements = document.querySelectorAll('[data-admin-phone]');
-        phoneElements.forEach(el => {
-            el.textContent = data.contact.phone;
-            if (el.tagName === 'A') el.href = 'tel:' + data.contact.phone;
-        });
+    // Galeri güncelleme
+    if (data.gallery && data.gallery.length > 0) {
+        const galleryGrid = document.querySelector('.gallery-grid');
+        if (galleryGrid) {
+            galleryGrid.innerHTML = '';
+            data.gallery.forEach(photo => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'gallery-item';
+                button.setAttribute('data-src', photo.url);
+                
+                const img = document.createElement('img');
+                img.src = photo.url;
+                img.alt = photo.desc || 'Galeri fotoğrafı';
+                img.loading = 'lazy';
+                
+                button.appendChild(img);
+                button.addEventListener('click', () => openLightbox(photo.url));
+                galleryGrid.appendChild(button);
+            });
+        }
     }
     
-    if (data.contact.email) {
-        const emailElements = document.querySelectorAll('[data-admin-email]');
-        emailElements.forEach(el => {
-            el.textContent = data.contact.email;
-            if (el.tagName === 'A') el.href = 'mailto:' + data.contact.email;
-        });
-    }
-    
-    if (data.contact.address) {
-        const addressElements = document.querySelectorAll('[data-admin-address]');
-        addressElements.forEach(el => {
-            el.textContent = data.contact.address;
-        });
-    }
-    
-    // İçerik verilerini güncelle
+    // İçerik güncelleme
     if (data.content.siteTitle) {
         const titleElements = document.querySelectorAll('[data-admin-title]');
         titleElements.forEach(el => {
-            el.textContent = data.content.siteTitle;
+            if (el.querySelector('span')) {
+                el.innerHTML = data.content.siteTitle.replace('HAT', '<span>HAT</span>');
+            } else {
+                el.textContent = data.content.siteTitle;
+            }
         });
     }
     
@@ -59,48 +54,36 @@ function updateSiteContent() {
         });
     }
     
-    if (data.content.feature1) {
-        const feature1 = document.querySelector('[data-admin-feature="1"]');
-        if (feature1) feature1.textContent = data.content.feature1;
+    // İletişim güncelleme
+    if (data.contact.phone) {
+        const phoneElements = document.querySelectorAll('[data-admin-phone]');
+        phoneElements.forEach(el => {
+            el.textContent = data.contact.phone;
+            if (el.tagName === 'A') el.href = 'tel:' + data.contact.phone;
+        });
     }
     
-    if (data.content.feature2) {
-        const feature2 = document.querySelector('[data-admin-feature="2"]');
-        if (feature2) feature2.textContent = data.content.feature2;
-    }
-    
-    if (data.content.feature3) {
-        const feature3 = document.querySelector('[data-admin-feature="3"]');
-        if (feature3) feature3.textContent = data.content.feature3;
-    }
-    
-    // Galeriyi güncelle
-    if (data.gallery.length > 0) {
-        const galleryContainer = document.querySelector('.gallery-grid');
-        if (galleryContainer) {
-            galleryContainer.innerHTML = '';
-            data.gallery.forEach(photo => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                const img = document.createElement('img');
-                img.src = photo.url;
-                img.alt = photo.desc || 'Galeri fotoğrafı';
-                button.appendChild(img);
-                galleryContainer.appendChild(button);
-            });
-        }
+    if (data.contact.address) {
+        const addressElements = document.querySelectorAll('[data-admin-address]');
+        addressElements.forEach(el => {
+            el.textContent = data.contact.address;
+        });
     }
 }
 
 // Sayfa yüklendiğinde veriyi güncelle
-document.addEventListener('DOMContentLoaded', updateSiteContent);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSiteContent);
+} else {
+    updateSiteContent();
+}
 
-// localStorage değişikliklerini dinle (başka tapta admin değişirse)
+// localStorage değişikliklerini dinle
 window.addEventListener('storage', function(e) {
-    if (e.key === 'adminContact' || e.key === 'adminContent' || e.key === 'adminGallery') {
+    if (e.key === 'adminData') {
         updateSiteContent();
     }
 });
 
-// Her 5 saniyede bir kontrol et (refresh etmeden güncelleme)
-setInterval(updateSiteContent, 5000);
+// Her 2 saniyede bir kontrol et
+setInterval(updateSiteContent, 2000);
