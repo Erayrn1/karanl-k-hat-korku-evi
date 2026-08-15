@@ -1,70 +1,88 @@
-// Gallery Management
-const GALLERY_KEY = 'adminGallery';
+// Gallery management functions for admin panel
 
-function loadGallery() {
-    const container = document.getElementById('galleryContainer');
-    const gallery = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
-    
-    container.innerHTML = '';
-    
-    if (gallery.length === 0) {
-        container.innerHTML = '<p style="color: rgba(247, 243, 244, 0.6); text-align: center; padding: 20px;">Henüz fotoğraf eklenmemiş</p>';
+function addPhoto() {
+    const photoUrl = document.getElementById('photoUrl')?.value.trim();
+    const photoDesc = document.getElementById('photoDesc')?.value.trim();
+
+    if (!photoUrl) {
+        alert('Lütfen bir URL girin!');
         return;
     }
+
+    let gallery = JSON.parse(localStorage.getItem('adminGallery') || '[]');
+    gallery.push({
+        id: Date.now(),
+        url: photoUrl,
+        desc: photoDesc,
+        type: 'url'
+    });
+
+    localStorage.setItem('adminGallery', JSON.stringify(gallery));
     
-    gallery.forEach((photo, index) => {
-        const photoEl = document.createElement('div');
-        photoEl.className = 'gallery-item';
-        photoEl.innerHTML = `
+    // Temizle
+    document.getElementById('photoUrl').value = '';
+    document.getElementById('photoDesc').value = '';
+
+    // Listeyi güncelle
+    loadGallery();
+
+    // Başarı mesajı
+    const msg = document.getElementById('successMsg');
+    if (msg) {
+        msg.classList.add('show');
+        setTimeout(() => msg.classList.remove('show'), 3000);
+    }
+}
+
+function loadGallery() {
+    const galleryContainer = document.getElementById('galleryContainer');
+    if (!galleryContainer) return;
+
+    const gallery = JSON.parse(localStorage.getItem('adminGallery') || '[]');
+    galleryContainer.innerHTML = '';
+
+    if (gallery.length === 0) {
+        galleryContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #b9afb2;">Henüz fotoğraf eklenmemiş</p>';
+        return;
+    }
+
+    gallery.reverse().forEach(photo => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `
+            <img src="${photo.url}" alt="Galeri fotoğrafı" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23333%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2216%22%3EResim Yüklenemedi%3C/text%3E%3C/svg%3E'">
             <div class="gallery-item-info">
-                <div class="gallery-item-url">${photo.url}</div>
-                ${photo.desc ? `<div class="gallery-item-desc">${photo.desc}</div>` : ''}
+                ${photo.desc ? `<p>${photo.desc}</p>` : ''}
+                <div class="gallery-item-actions">
+                    <button class="copy-btn" onclick="copyURL('${photo.url}')">📋 URL</button>
+                    <button class="delete-btn" onclick="deletePhoto(${photo.id})">🗑️ Sil</button>
+                </div>
             </div>
-            <button class="delete-btn" onclick="deletePhoto(${index})">Sil</button>
         `;
-        container.appendChild(photoEl);
+        galleryContainer.appendChild(div);
+    });
+
+    // Fotoğraf sayısını güncelle
+    const photoCount = document.getElementById('photoCount');
+    if (photoCount) {
+        photoCount.textContent = gallery.length;
+    }
+}
+
+function deletePhoto(id) {
+    if (confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
+        let gallery = JSON.parse(localStorage.getItem('adminGallery') || '[]');
+        gallery = gallery.filter(p => p.id !== id);
+        localStorage.setItem('adminGallery', JSON.stringify(gallery));
+        loadGallery();
+    }
+}
+
+function copyURL(url) {
+    navigator.clipboard.writeText(url).then(() => {
+        alert('URL kopyalandı!');
     });
 }
 
-function addPhoto() {
-    const urlInput = document.getElementById('photoUrl');
-    const descInput = document.getElementById('photoDesc');
-    const url = urlInput.value.trim();
-    const desc = descInput.value.trim();
-    
-    if (!url) {
-        alert('Lütfen fotoğraf URL\'sini girin');
-        return;
-    }
-    
-    const gallery = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
-    gallery.push({ url, desc });
-    localStorage.setItem(GALLERY_KEY, JSON.stringify(gallery));
-    
-    // Siteye bildir
-    syncData();
-    
-    urlInput.value = '';
-    descInput.value = '';
-    loadGallery();
-    alert('Fotoğraf başarıyla eklendi!');
-}
-
-function deletePhoto(index) {
-    if (confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
-        const gallery = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
-        gallery.splice(index, 1);
-        localStorage.setItem(GALLERY_KEY, JSON.stringify(gallery));
-        
-        // Siteye bildir
-        syncData();
-        
-        loadGallery();
-        alert('Fotoğraf silindi!');
-    }
-}
-
-// Sayfa yüklendiğinde galeryi yükle
-document.addEventListener('DOMContentLoaded', function() {
-    loadGallery();
-});
+// Sayfa yüklendiğinde galeriyi göster
+document.addEventListener('DOMContentLoaded', loadGallery);
