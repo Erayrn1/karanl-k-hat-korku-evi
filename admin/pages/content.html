@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İçerik Yönetimi - Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Montserrat:wght@400;500;600;700&family=Nosifer&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar" aria-label="Admin menüsü">
+        <div class="sidebar-head">
+            <p class="logo-mark">KH</p>
+            <div>
+                <h1 class="logo-title">Karanlık Hat</h1>
+                <p class="logo-subtitle">Admin Panel</p>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../dashboard.html" class="nav-link" data-nav-link><span>🏠</span><span>Ana Sayfa</span></a>
+            <a href="gallery.html" class="nav-link" data-nav-link><span>🖼️</span><span>Galeri</span></a>
+            <a href="content.html" class="nav-link active" data-nav-link><span>📝</span><span>İçerik</span></a>
+            <a href="contact.html" class="nav-link" data-nav-link><span>📞</span><span>İletişim</span></a>
+            <a href="settings.html" class="nav-link" data-nav-link><span>⚙️</span><span>Ayarlar</span></a>
+        </nav>
+    </aside>
+
+    <div class="main-wrap">
+        <header class="topbar">
+            <div>
+                <p class="page-eyebrow">İçerik Yönetimi</p>
+                <h2 class="page-title">Site Metinleri ve Feature Kartları</h2>
+            </div>
+            <button class="btn btn-ghost" id="logoutBtn" type="button">Çıkış</button>
+        </header>
+
+        <main class="page-grid two-col">
+            <section class="form-card">
+                <form id="contentForm" novalidate>
+                    <div class="form-group">
+                        <label for="siteTitle">Site Başlığı</label>
+                        <input id="siteTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mainSlogan">Ana Slogan</label>
+                        <textarea id="mainSlogan" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="aboutText">Hakkında Metni</label>
+                        <textarea id="aboutText" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="feature1">Feature 1 (11 Oda)</label><input id="feature1" required></div>
+                        <div class="form-group"><label for="feature2">Feature 2 (1 Koridor)</label><input id="feature2" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="feature3">Feature 3 (2 Tünel)</label><input id="feature3" required></div>
+                        <div class="form-group"><label for="feature4">Feature 4 (60 Dakika)</label><input id="feature4" required></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailText">Açıklama ve Detaylar</label>
+                        <textarea id="detailText" required></textarea>
+                    </div>
+                    <div class="footer-actions">
+                        <button class="btn" type="submit">Kaydet</button>
+                        <button class="btn btn-ghost" type="button" id="cancelBtn">İptal</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="list-card">
+                <h3>Live Preview</h3>
+                <article class="live-preview" id="previewBox"></article>
+            </section>
+        </main>
+    </div>
+</div>
+
+<div class="toast" id="globalToast" role="status" aria-live="polite"></div>
+
+<script src="../js/app.js"></script>
+<script>
+(() => {
+    AdminApp.initLayout();
+
+    const key = AdminApp.keys.content;
+    const form = document.getElementById('contentForm');
+    const preview = document.getElementById('previewBox');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    const fields = ['siteTitle', 'mainSlogan', 'aboutText', 'feature1', 'feature2', 'feature3', 'feature4', 'detailText'];
+
+    const defaults = {
+        siteTitle: 'Karanlık Hat Korku Evi',
+        mainSlogan: 'Gerçeğin kabusa dönüştüğü yer.',
+        aboutText: 'Gerçek oyuncular ve sürükleyici senaryo ile unutulmaz bir deneyim.',
+        feature1: '11 Oda',
+        feature2: '1 Koridor',
+        feature3: '2 Tünel Girişi',
+        feature4: '60 Dakikaya Kadar',
+        detailText: 'Cesaretin varsa bu deneyimin bir parçası ol.'
+    };
+
+    const getFormData = () => fields.reduce((acc, name) => {
+        acc[name] = document.getElementById(name).value.trim();
+        return acc;
+    }, {});
+
+    const renderPreview = () => {
+        const data = getFormData();
+        preview.innerHTML = '';
+        const title = document.createElement('h3');
+        title.textContent = data.siteTitle || '-';
+        const slogan = document.createElement('p');
+        slogan.textContent = data.mainSlogan || '-';
+        const about = document.createElement('p');
+        about.className = 'muted';
+        about.textContent = data.aboutText || '-';
+        const list = document.createElement('ul');
+        [data.feature1, data.feature2, data.feature3, data.feature4].forEach((feature) => {
+            const li = document.createElement('li');
+            li.textContent = feature || '-';
+            list.appendChild(li);
+        });
+        const detail = document.createElement('p');
+        detail.textContent = data.detailText || '-';
+        preview.append(title, slogan, about, list, detail);
+    };
+
+    const load = () => {
+        const data = { ...defaults, ...AdminApp.getStorage(key, {}) };
+        fields.forEach((name) => {
+            document.getElementById(name).value = data[name] || '';
+        });
+        renderPreview();
+    };
+
+    form.addEventListener('input', renderPreview);
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!AdminApp.validateForm(form)) return;
+
+        AdminApp.setStorage(key, getFormData());
+        AdminApp.addActivity('İçerik sayfası güncellendi');
+        AdminApp.showToast('İçerik kaydedildi.');
+    });
+
+    cancelBtn.addEventListener('click', load);
+
+    load();
+})();
+</script>
+</body>
+</html>

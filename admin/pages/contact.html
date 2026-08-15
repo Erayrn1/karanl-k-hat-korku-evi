@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim Yönetimi - Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Montserrat:wght@400;500;600;700&family=Nosifer&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar" aria-label="Admin menüsü">
+        <div class="sidebar-head">
+            <p class="logo-mark">KH</p>
+            <div>
+                <h1 class="logo-title">Karanlık Hat</h1>
+                <p class="logo-subtitle">Admin Panel</p>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../dashboard.html" class="nav-link" data-nav-link><span>🏠</span><span>Ana Sayfa</span></a>
+            <a href="gallery.html" class="nav-link" data-nav-link><span>🖼️</span><span>Galeri</span></a>
+            <a href="content.html" class="nav-link" data-nav-link><span>📝</span><span>İçerik</span></a>
+            <a href="contact.html" class="nav-link active" data-nav-link><span>📞</span><span>İletişim</span></a>
+            <a href="settings.html" class="nav-link" data-nav-link><span>⚙️</span><span>Ayarlar</span></a>
+        </nav>
+    </aside>
+
+    <div class="main-wrap">
+        <header class="topbar">
+            <div>
+                <p class="page-eyebrow">İletişim Yönetimi</p>
+                <h2 class="page-title">İletişim Bilgileri ve Harita</h2>
+            </div>
+            <button class="btn btn-ghost" id="logoutBtn" type="button">Çıkış</button>
+        </header>
+
+        <main class="page-grid two-col">
+            <section class="form-card">
+                <form id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group"><label for="phone">Telefon Numarası</label><input id="phone" required></div>
+                        <div class="form-group"><label for="phone2">İkinci Telefon</label><input id="phone2"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="email">Email</label><input id="email" type="email" required></div>
+                        <div class="form-group"><label for="whatsapp">WhatsApp</label><input id="whatsapp" required></div>
+                    </div>
+                    <div class="form-group"><label for="address">Adres</label><input id="address" required></div>
+                    <div class="form-group"><label for="instagram">Instagram</label><input id="instagram" placeholder="https://instagram.com/..." required></div>
+                    <div class="form-group"><label for="mapEmbed">Harita Embed URL</label><input id="mapEmbed" placeholder="https://www.google.com/maps?q=...&output=embed" required></div>
+                    <div class="footer-actions">
+                        <button class="btn" type="submit">Kaydet</button>
+                        <button class="btn btn-secondary" type="button" id="testSendBtn">Test Gönder</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="list-card">
+                <h3>Harita Önizleme</h3>
+                <iframe id="mapFrame" title="Harita" src="about:blank" style="width:100%;height:280px;border:0;border-radius:10px;"></iframe>
+                <p class="muted" id="testStatus" aria-live="polite"></p>
+            </section>
+        </main>
+    </div>
+</div>
+
+<div class="toast" id="globalToast" role="status" aria-live="polite"></div>
+
+<script src="../js/app.js"></script>
+<script>
+(() => {
+    AdminApp.initLayout();
+
+    const key = AdminApp.keys.contact;
+    const form = document.getElementById('contactForm');
+    const mapFrame = document.getElementById('mapFrame');
+    const testSendBtn = document.getElementById('testSendBtn');
+    const testStatus = document.getElementById('testStatus');
+
+    const defaults = {
+        phone: '+90 533 484 2521',
+        phone2: '+90 533 381 4921',
+        email: 'info@karanlikhat.com',
+        whatsapp: '+90 533 381 4921',
+        address: 'Namık Kemal, 15. Sk. No:1/A D:1, Esenyurt/İstanbul',
+        instagram: 'https://www.instagram.com/karanlikhatkorkuevi',
+        mapEmbed: 'https://www.google.com/maps?q=Namık+Kemal,+15.+Sk.+No:1+D:1,+34513+Esenyurt/İstanbul&output=embed'
+    };
+
+    const fields = ['phone', 'phone2', 'email', 'whatsapp', 'address', 'instagram', 'mapEmbed'];
+
+    const getFormData = () => fields.reduce((acc, keyName) => {
+        acc[keyName] = document.getElementById(keyName).value.trim();
+        return acc;
+    }, {});
+
+    const setMap = () => {
+        mapFrame.src = document.getElementById('mapEmbed').value.trim() || 'about:blank';
+    };
+
+    const load = () => {
+        const data = { ...defaults, ...AdminApp.getStorage(key, {}) };
+        fields.forEach((name) => {
+            document.getElementById(name).value = data[name] || '';
+        });
+        setMap();
+    };
+
+    form.addEventListener('input', (event) => {
+        if (event.target.id === 'mapEmbed') setMap();
+    });
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!AdminApp.validateForm(form)) return;
+        AdminApp.setStorage(key, getFormData());
+        AdminApp.addActivity('İletişim bilgileri güncellendi');
+        AdminApp.showToast('İletişim bilgileri kaydedildi.');
+    });
+
+    testSendBtn.addEventListener('click', async () => {
+        testSendBtn.disabled = true;
+        testStatus.textContent = 'Test gönderiliyor...';
+        const ok = await AdminApp.fakeFetch({ type: 'contact-test', payload: getFormData(), at: Date.now() });
+        testSendBtn.disabled = false;
+        testStatus.textContent = ok ? 'Test gönderimi başarılı.' : 'Test gönderimi başarısız.';
+        AdminApp.showToast(ok ? 'Test gönderimi başarılı.' : 'Test gönderimi başarısız.', ok ? 'success' : 'error');
+    });
+
+    load();
+})();
+</script>
+</body>
+</html>

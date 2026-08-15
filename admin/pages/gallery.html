@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Yönetimi - Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Montserrat:wght@400;500;600;700&family=Nosifer&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar" aria-label="Admin menüsü">
+        <div class="sidebar-head">
+            <p class="logo-mark">KH</p>
+            <div>
+                <h1 class="logo-title">Karanlık Hat</h1>
+                <p class="logo-subtitle">Admin Panel</p>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../dashboard.html" class="nav-link" data-nav-link><span>🏠</span><span>Ana Sayfa</span></a>
+            <a href="gallery.html" class="nav-link active" data-nav-link><span>🖼️</span><span>Galeri</span></a>
+            <a href="content.html" class="nav-link" data-nav-link><span>📝</span><span>İçerik</span></a>
+            <a href="contact.html" class="nav-link" data-nav-link><span>📞</span><span>İletişim</span></a>
+            <a href="settings.html" class="nav-link" data-nav-link><span>⚙️</span><span>Ayarlar</span></a>
+        </nav>
+    </aside>
+
+    <div class="main-wrap">
+        <header class="topbar">
+            <div>
+                <p class="page-eyebrow">Galeri Yönetimi</p>
+                <h2 class="page-title">Fotoğraf Akışı (Seç → Onayla → Ekle)</h2>
+            </div>
+            <div class="topbar-actions">
+                <button class="btn btn-ghost" id="logoutBtn" type="button">Çıkış</button>
+            </div>
+        </header>
+
+        <main class="page-grid two-col">
+            <section class="form-card">
+                <h3>Yeni Fotoğraf</h3>
+                <div class="dropzone" id="dropzone" aria-label="Fotoğraf sürükle bırak alanı">
+                    <p>Dosya seçin veya sürükleyip bırakın</p>
+                    <input id="fileInput" type="file" accept="image/*" multiple aria-label="Fotoğraf seç" />
+                </div>
+
+                <div class="form-group">
+                    <label for="photoDesc">Fotoğraf Açıklaması</label>
+                    <textarea id="photoDesc" placeholder="Albüm açıklaması"></textarea>
+                </div>
+
+                <div class="footer-actions">
+                    <button class="btn btn-secondary" type="button" id="confirmBtn">1) Onayla</button>
+                    <button class="btn" type="button" id="addBtn" disabled>2) Ekle</button>
+                    <button class="btn btn-ghost" type="button" id="clearBtn">İptal</button>
+                </div>
+
+                <div class="inline-actions" id="loadingBox" style="display:none;"><span class="loading" aria-hidden="true"></span> Yükleniyor...</div>
+                <div class="preview-grid" id="previewGrid"></div>
+            </section>
+
+            <section class="list-card">
+                <h3>Yüklenen Fotoğraflar (<span id="photoCount">0</span>)</h3>
+                <div class="photo-list" id="photoList"></div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<div class="toast" id="globalToast" role="status" aria-live="polite"></div>
+
+<script src="../js/app.js"></script>
+<script>
+(() => {
+    AdminApp.initLayout();
+
+    const galleryKey = AdminApp.keys.gallery;
+    const fileInput = document.getElementById('fileInput');
+    const dropzone = document.getElementById('dropzone');
+    const previewGrid = document.getElementById('previewGrid');
+    const photoList = document.getElementById('photoList');
+    const photoCount = document.getElementById('photoCount');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const addBtn = document.getElementById('addBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const loadingBox = document.getElementById('loadingBox');
+    const photoDesc = document.getElementById('photoDesc');
+
+    let pendingFiles = [];
+
+    const toDataUrl = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Dosya okunamadı'));
+        reader.readAsDataURL(file);
+    });
+
+    const renderUploaded = () => {
+        const gallery = AdminApp.getStorage(galleryKey, []);
+        photoCount.textContent = gallery.length;
+        photoList.innerHTML = '';
+
+        if (!gallery.length) {
+            photoList.innerHTML = '<p class="muted">Henüz fotoğraf yok.</p>';
+            return;
+        }
+
+        gallery.slice().reverse().forEach((photo) => {
+            const card = document.createElement('article');
+            card.className = 'photo-card card-hover';
+            const img = document.createElement('img');
+            img.src = photo.url;
+            img.alt = photo.desc || 'Galeri fotoğrafı';
+            img.loading = 'lazy';
+
+            const body = document.createElement('div');
+            body.className = 'photo-body';
+            const desc = document.createElement('p');
+            desc.textContent = photo.desc || 'Açıklama yok';
+            const meta = document.createElement('small');
+            meta.className = 'muted';
+            meta.textContent = photo.uploadedAt || '';
+            const actions = document.createElement('div');
+            actions.className = 'photo-actions';
+            const editButton = document.createElement('button');
+            editButton.type = 'button';
+            editButton.className = 'btn btn-ghost';
+            editButton.dataset.edit = String(photo.id);
+            editButton.textContent = 'Düzenle';
+            const deleteButton = document.createElement('button');
+            deleteButton.type = 'button';
+            deleteButton.className = 'btn btn-secondary';
+            deleteButton.dataset.delete = String(photo.id);
+            deleteButton.textContent = 'Sil';
+            actions.appendChild(editButton);
+            actions.appendChild(deleteButton);
+            body.append(desc, meta, actions);
+            card.append(img, body);
+            photoList.appendChild(card);
+        });
+    };
+
+    const renderPending = () => {
+        previewGrid.innerHTML = '';
+        pendingFiles.forEach((item, index) => {
+            const card = document.createElement('article');
+            card.className = 'preview-card';
+            const img = document.createElement('img');
+            img.src = item.preview;
+            img.alt = 'Önizleme';
+            const body = document.createElement('div');
+            body.className = 'preview-body';
+            const fileName = document.createElement('p');
+            fileName.textContent = item.file.name;
+            const removeButton = document.createElement('button');
+            removeButton.className = 'btn btn-ghost';
+            removeButton.type = 'button';
+            removeButton.dataset.remove = String(index);
+            removeButton.textContent = 'Seçimi Kaldır';
+            body.append(fileName, removeButton);
+            card.append(img, body);
+            previewGrid.appendChild(card);
+        });
+        addBtn.disabled = !pendingFiles.length;
+    };
+
+    const acceptFiles = (files) => {
+        pendingFiles = Array.from(files)
+            .filter((file) => file.type.startsWith('image/'))
+            .map((file) => ({
+                file,
+                preview: URL.createObjectURL(file)
+            }));
+
+        if (!pendingFiles.length) {
+            AdminApp.showToast('Geçerli görsel seçin.', 'error');
+            return;
+        }
+
+        AdminApp.showToast('Dosyalar seçildi. Onayla butonuna basın.');
+        renderPending();
+    };
+
+    fileInput.addEventListener('change', (event) => acceptFiles(event.target.files));
+
+    ['dragover', 'drop'].forEach((eventName) => {
+        dropzone.addEventListener(eventName, (event) => {
+            event.preventDefault();
+        });
+    });
+
+    dropzone.addEventListener('dragover', () => dropzone.classList.add('drag-over'));
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+    dropzone.addEventListener('drop', (event) => {
+        dropzone.classList.remove('drag-over');
+        acceptFiles(event.dataTransfer.files);
+    });
+
+    confirmBtn.addEventListener('click', () => {
+        if (!pendingFiles.length) {
+            AdminApp.showToast('Önce dosya seçin.', 'error');
+            return;
+        }
+        addBtn.disabled = false;
+        AdminApp.showToast('Onaylandı. Şimdi Ekle butonuna basın.');
+    });
+
+    addBtn.addEventListener('click', async () => {
+        if (!pendingFiles.length) {
+            AdminApp.showToast('Eklenecek dosya yok.', 'error');
+            return;
+        }
+
+        addBtn.disabled = true;
+        loadingBox.style.display = 'flex';
+        const existing = AdminApp.getStorage(galleryKey, []);
+
+        for (const item of pendingFiles) {
+            const url = await toDataUrl(item.file);
+            existing.push({
+                id: Date.now() + Math.random(),
+                url,
+                desc: photoDesc.value.trim(),
+                uploadedAt: new Date().toLocaleString('tr-TR')
+            });
+        }
+
+        AdminApp.setStorage(galleryKey, existing);
+        AdminApp.addActivity(`${pendingFiles.length} fotoğraf galeride güncellendi`);
+
+        loadingBox.style.display = 'none';
+        pendingFiles.forEach((item) => URL.revokeObjectURL(item.preview));
+        pendingFiles = [];
+        photoDesc.value = '';
+        fileInput.value = '';
+        renderPending();
+        renderUploaded();
+        AdminApp.showToast('Fotoğraflar eklendi.');
+    });
+
+    clearBtn.addEventListener('click', () => {
+        pendingFiles.forEach((item) => URL.revokeObjectURL(item.preview));
+        pendingFiles = [];
+        fileInput.value = '';
+        renderPending();
+        AdminApp.showToast('Seçimler temizlendi.');
+    });
+
+    previewGrid.addEventListener('click', (event) => {
+        const removeIndex = event.target.getAttribute('data-remove');
+        if (removeIndex === null) return;
+        const index = Number(removeIndex);
+        if (pendingFiles[index]) URL.revokeObjectURL(pendingFiles[index].preview);
+        pendingFiles.splice(index, 1);
+        renderPending();
+    });
+
+    photoList.addEventListener('click', (event) => {
+        const deleteId = event.target.getAttribute('data-delete');
+        const editId = event.target.getAttribute('data-edit');
+
+        if (deleteId) {
+            const id = Number(deleteId);
+            const updated = AdminApp.getStorage(galleryKey, []).filter((item) => item.id !== id);
+            AdminApp.setStorage(galleryKey, updated);
+            AdminApp.addActivity('Bir fotoğraf silindi');
+            renderUploaded();
+            AdminApp.showToast('Fotoğraf silindi.');
+            return;
+        }
+
+        if (editId) {
+            const id = Number(editId);
+            const list = AdminApp.getStorage(galleryKey, []);
+            const index = list.findIndex((item) => item.id === id);
+            if (index < 0) return;
+            const nextDesc = prompt('Yeni açıklama:', list[index].desc || '');
+            if (nextDesc === null) return;
+            list[index].desc = nextDesc.trim();
+            AdminApp.setStorage(galleryKey, list);
+            AdminApp.addActivity('Fotoğraf açıklaması düzenlendi');
+            renderUploaded();
+            AdminApp.showToast('Açıklama güncellendi.');
+        }
+    });
+
+    renderPending();
+    renderUploaded();
+})();
+</script>
+</body>
+</html>
