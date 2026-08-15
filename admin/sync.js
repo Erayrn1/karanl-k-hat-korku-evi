@@ -78,6 +78,11 @@ function updateSiteContent() {
     updateGalleryGrid(data.gallery);
 }
 
+function isSafeImageUrl(url) {
+    if (typeof url !== 'string') return false;
+    return url.startsWith('data:image/') || url.startsWith('https://') || url.startsWith('http://');
+}
+
 function updateGalleryGrid(galleryData) {
     const galleryContainer = document.querySelector('.gallery-grid');
     if (!galleryContainer) return;
@@ -96,6 +101,8 @@ function updateGalleryGrid(galleryData) {
     // Admin fotoğraflarıyla galeriyi doldur
     galleryContainer.innerHTML = '';
     galleryData.forEach((photo, index) => {
+        if (!isSafeImageUrl(photo.url)) return;
+
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'gallery-item';
